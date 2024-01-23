@@ -21,8 +21,6 @@ public class SimpleController : MonoBehaviour
         velocity.x = xInput * movementSpeed;
         rigid.velocity = velocity;
 
-        print(IsGrounded());
-
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rigid.AddForce(Vector2.up * jumpForce);
