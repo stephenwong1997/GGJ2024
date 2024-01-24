@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Cysharp.Threading.Tasks;
 
 public class PlatformSpawner : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class PlatformSpawner : MonoBehaviour
 
     private bool _isSpawning = false;
 
+    // MonoBehaviour METHODS
     private void OnValidate()
     {
         Assert.IsNotNull(_spawnPoint);
@@ -21,21 +22,26 @@ public class PlatformSpawner : MonoBehaviour
 
     private void Start()
     {
-        // TODO : Import UniTask
-        // StartSpawnLoopAsync();
+        StartSpawnLoopAsync().Forget(); // Forget means fire and forget, no need to await
     }
 
-    private async void StartSpawnLoopAsync()
+    // PUBLIC METHODS
+    public void StopSpawning()
+    {
+        _isSpawning = false;
+    }
+
+    // PRIVATE METHODS
+    private async UniTaskVoid StartSpawnLoopAsync()
     {
         _isSpawning = true;
-
 
         int spawnFrequencyMiliseconds = Mathf.CeilToInt(_spawnFrequency * 1000);
 
         while (_isSpawning)
         {
             Debug.Log("Spawn!");
-            await Task.Delay(spawnFrequencyMiliseconds);
+            await UniTask.Delay(spawnFrequencyMiliseconds);
         }
     }
 }
