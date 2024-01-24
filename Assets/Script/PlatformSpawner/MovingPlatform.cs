@@ -6,6 +6,7 @@ public class MovingPlatform : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private bool _isMoving = false;
     private PlatformSpawnerSettingsSO _settings;
+    private float _destroyXPosition = 0;
 
     // MonoBehaviour 
     private void Awake()
@@ -29,7 +30,10 @@ public class MovingPlatform : MonoBehaviour
         _settings = settings;
     }
 
-    // TODO : Set destroy self position
+    public void SetDestroyPosition(Vector2 position)
+    {
+        _destroyXPosition = position.x;
+    }
 
     // PRIVATE METHODS
     private void TryUpdatePosition()
@@ -44,5 +48,9 @@ public class MovingPlatform : MonoBehaviour
         targetPosition.x -= _settings.PlatformSpeed * Time.fixedDeltaTime;
 
         _rigidbody.MovePosition(targetPosition);
+
+        if (targetPosition.x <= _destroyXPosition)
+            // Use object pool.... later on if have time😂
+            Destroy(this.gameObject);
     }
 }
