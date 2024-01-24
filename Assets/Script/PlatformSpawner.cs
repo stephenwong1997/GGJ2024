@@ -7,7 +7,7 @@ using Cysharp.Threading.Tasks;
 public class PlatformSpawner : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField][Tooltip("Unit: Seconds")] private float _spawnFrequency;
+    [SerializeField] private PlatformSpawnerSettingsSO _settings;
 
     [Header("References")]
     [SerializeField] private Transform _spawnPoint;
@@ -17,6 +17,7 @@ public class PlatformSpawner : MonoBehaviour
     // MonoBehaviour METHODS
     private void OnValidate()
     {
+        Assert.IsNotNull(_settings);
         Assert.IsNotNull(_spawnPoint);
     }
 
@@ -35,12 +36,13 @@ public class PlatformSpawner : MonoBehaviour
     private async UniTaskVoid StartSpawnLoopAsync()
     {
         _isSpawning = true;
-
-        int spawnFrequencyMiliseconds = Mathf.CeilToInt(_spawnFrequency * 1000);
-
         while (_isSpawning)
         {
             Debug.Log("Spawn!");
+
+            // Calculate in every iteration so that can have quick update from settings SO
+            int spawnFrequencyMiliseconds = Mathf.CeilToInt(_settings.SpawnFrequency * 1000);
+
             await UniTask.Delay(spawnFrequencyMiliseconds);
         }
     }

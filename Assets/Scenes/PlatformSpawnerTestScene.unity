@@ -560,7 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e84c1d6fbc54571a0abdd7784e9c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnFrequency: 2
+  _settings: {fileID: 11400000, guid: be6b83172fa0e41a0a57dc9febe567ff, type: 2}
   _spawnPoint: {fileID: 2021135820}
 --- !u!1 &2021135819
 GameObject:
