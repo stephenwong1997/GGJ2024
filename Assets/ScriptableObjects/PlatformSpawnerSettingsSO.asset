@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0d763beb1174d3893e85e72fbae472, type: 3}
   m_Name: PlatformSpawnerSettingsSO
   m_EditorClassIdentifier: 
-  MinSpawnFrequency: 0.8
-  MaxSpawnFrequency: 1.2
+  MinSpawnFrequency: 1.4
+  MaxSpawnFrequency: 2.5
   PlatformPrefabs:
-  - {fileID: 3133286604355698792, guid: 1e89e113c3a2742b496665cdef64888a, type: 3}
-  - {fileID: 392423493798657749, guid: fa730ad2f1a1f4d35a7d102b235a5bed, type: 3}
-  PlatformSpeed: 8
+  - {fileID: 6017441187374012398, guid: e268cc0a928ce4be1a2956d89dcc2a2b, type: 3}
+  - {fileID: 1982886950881517583, guid: 01450931158864b738e6b4ccf44497cd, type: 3}
+  - {fileID: 4123573231536548131, guid: fc369e66418e948e382bf7758999cff2, type: 3}
+  - {fileID: 8216443577588133424, guid: 9077935ad9cd047098a686e476ce3f45, type: 3}
+  - {fileID: 2410087494362865094, guid: 3e2768ecffdd449a8a4d042330143967, type: 3}
+  - {fileID: 8160194351504491481, guid: f076e84bd8e1f42fa9624856683f0eb9, type: 3}
+  - {fileID: 3944778758869935115, guid: 89d1efdfd3a5346f8a8d453e7c007b6e, type: 3}
+  - {fileID: 5503413852531888729, guid: 9e85fc56835524876a9221eafca8dec0, type: 3}
+  - {fileID: 4447588327051957244, guid: de4a5854249494a3cba1ce77515ef45a, type: 3}
+  - {fileID: 6578776283246282139, guid: 06a4e03a5e88e41958f663232758246a, type: 3}
+  PlatformSpeed: 5
