@@ -14,6 +14,14 @@ public class SimpleController : MonoBehaviour
     [SerializeField] Collider2D col;
     [SerializeField] LayerMask groundLayer;
 
+    private void Start()
+    {
+        // 使用 BoxCast 進行地面檢測
+        detectionSize = col.bounds.size;
+        groundCheckOffset.y = -col.bounds.size.y / 2;
+        detectionSize.y = .05f;
+    }
+
     void Update()
     {
         float xInput = Input.GetAxis("Horizontal");
@@ -30,10 +38,6 @@ public class SimpleController : MonoBehaviour
     {
         Vector2 position = transform.position;
         position += groundCheckOffset; // 計算檢測起點
-
-        // 使用 BoxCast 進行地面檢測
-        detectionSize = col.bounds.size;
-        detectionSize.y = .05f;
 
         RaycastHit2D hit = Physics2D.BoxCast(position, detectionSize, 0f, Vector2.down, 0.05f, groundLayer);
         return hit.collider != null; // 如果碰到某物則視為在地面上
