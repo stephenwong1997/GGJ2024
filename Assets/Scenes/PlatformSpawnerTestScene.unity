@@ -469,7 +469,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5f4021040edac431fa2d062328224c14, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -604,15 +604,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6556702266139145445, guid: 4ffa8a8e85da74243b60c7558a67db6e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.7
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 6601539346967880059, guid: 4ffa8a8e85da74243b60c7558a67db6e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8366154159714184358, guid: 4ffa8a8e85da74243b60c7558a67db6e, type: 3}
       propertyPath: m_Name
       value: PlatformSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8366154159714184358, guid: 4ffa8a8e85da74243b60c7558a67db6e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
