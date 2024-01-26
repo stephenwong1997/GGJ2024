@@ -28,4 +28,11 @@ public class ScriptableStats : ScriptableObject
     public float CoyoteTime = .15f;
 
     public float JumpBuffer = .2f;
+
+    public float DashSpeed =50f;
+
+    public float DashDuration = 0.2f;
+
+    public float DashCooldown = 1f;
+
 }

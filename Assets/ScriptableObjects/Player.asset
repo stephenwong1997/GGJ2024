@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Bits: 256
   MaxSpeed: 25
   Acceleration: 60
-  GroundDeceleration: 60
+  GroundDeceleration: 5131.5
   AirDeceleration: 79.6
   GroundingForce: -0.5
   GrounderDistance: 0.05
@@ -33,3 +33,6 @@ MonoBehaviour:
   JumpEndEarlyGravityModifier: 3
   CoyoteTime: 0.15
   JumpBuffer: 0.2
+  DashSpeed: 100
+  DashDuration: 0.1
+  DashCooldown: 1

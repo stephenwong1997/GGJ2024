@@ -5,27 +5,34 @@ using HappyFunTimes;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Stats")]
     [SerializeField] private ScriptableStats _stats;
 
-    public Transform nameTransform;
-    public Color baseColor;
+
     private Rigidbody2D _rb;
     private CapsuleCollider2D _col;
     private FrameInput _frameInput;
     private Vector2 _frameVelocity;
+    public bool Facingleft;
     private bool _cachedQueryStartInColliders;
-    public Vector2 FrameInput => _frameInput.Move;
     private float _time;
-    private HFTInput m_hftInput;
-
     private SpriteRenderer m_spriteRenderer;
+
+
+    [Header("HFT")]
+    public Transform nameTransform;
+    public Color baseColor;
+    private HFTInput m_hftInput;
     public bool deleteWhenDisconnected = true;
     private HFTGamepad m_gamepad;
+
+    [Header("Name")]
     private GUIStyle m_guiStyle = new GUIStyle();
     private GUIContent m_guiName = new GUIContent("");
     private Rect m_nameRect = new Rect(0, 0, 0, 0);
     private string m_playerName;
     private static int m_playerNumber = 0;
+
 
     private void Start()
     {
@@ -38,23 +45,36 @@ public class PlayerMovement : MonoBehaviour
         SetName(m_gamepad.Name);
         m_gamepad.OnNameChange += ChangeName;
         m_gamepad.OnDisconnect += Remove;
-        baseColor= m_gamepad.color;
+        baseColor = m_gamepad.color;
         m_spriteRenderer.color = baseColor;
     }
-
     private void Update()
     {
         _time += Time.deltaTime;
         GatherInput();
     }
+    private void FixedUpdate()
+    {
+        CheckCollisions();
+        HandleJump();
+        HandleDirection();
+        ApplyMovement();
+        HandleGravity();
+    }
 
     #region Input
     private void GatherInput()
     {
+
+        if (isDashing) {
+            return;
+        }
+
+
         bool jumpButtonDown = Input.GetKeyDown(KeyCode.Space) || m_hftInput.GetButtonDown("fire2");
         bool jumpButtonHeld = Input.GetKey(KeyCode.Space) || m_hftInput.GetButton("fire2");
-        bool skillButtonDown = Input.GetButtonDown("Fire1") || m_hftInput.GetButtonDown("fire1");
-        bool DashButtonDown = Input.GetButtonDown("Fire2") || m_hftInput.GetButtonDown("fire3");
+        bool skillButtonDown = Input.GetButtonDown("Fire1") || m_hftInput.GetButtonDown("fire3");
+        bool DashButtonDown = Input.GetButtonDown("Fire2") || m_hftInput.GetButtonDown("fire1");
         float horizontalInput = Input.GetAxisRaw("Horizontal") + m_hftInput.GetAxis("Horizontal");
 
 
@@ -64,36 +84,30 @@ public class PlayerMovement : MonoBehaviour
             JumpDown = jumpButtonDown,
             JumpHeld = jumpButtonHeld,
             SkillDown = skillButtonDown,
-            DashDown= DashButtonDown,
+            DashDown = DashButtonDown,
             Move = new Vector2(horizontalInput, Input.GetAxisRaw("Vertical") + m_hftInput.GetAxis("Vertical"))
         };
 
         if (_frameInput.JumpDown)
         {
-            Debug.Log("Jump");
+            //Debug.Log("JumpDown");
             _jumpToConsume = true;
             _timeJumpWasPressed = _time;
         }
 
-        if (_frameInput.SkillDown)
+       if (_frameInput.SkillDown)
         {
-            Debug.Log("Skill");
+            //Debug.Log("SkillDown");
         }
 
         if (_frameInput.DashDown)
         {
-            Debug.Log("Dash");
+            Debug.Log("DashDown");
+            if (CanDash) StartCoroutine(Dash());
         }
+
     }
     #endregion
-    private void FixedUpdate()
-    {
-        CheckCollisions();
-        HandleJump();
-        HandleDirection();
-        ApplyMovement();
-        HandleGravity();
-    }
 
     #region Collisions
 
@@ -105,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
         Physics2D.queriesStartInColliders = false;
 
         bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.OneWayPlatformLayer);
-        bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.GroundLayer) || 
+        bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.GroundLayer) ||
                                         Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.OneWayPlatformLayer) ||
                                         Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.PlayerLayer);
 
@@ -164,6 +178,36 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+    #region Dashing
+    public bool CanDash = true;
+    public bool isDashing;
+
+        private IEnumerator Dash()
+    {
+        Debug.Log("Dash");
+        CanDash = false;
+        isDashing = true;
+
+        float targetDashSpeed = _stats.DashSpeed * (Facingleft ? -1 : 1); 
+        float originalSpeed = _rb.velocity.x; 
+        float dashTime = 0;
+
+        while (dashTime < _stats.DashDuration)
+        {
+            dashTime += Time.fixedDeltaTime;
+            _frameVelocity.x = Mathf.MoveTowards(originalSpeed, targetDashSpeed, dashTime / _stats.DashDuration * _stats.DashSpeed);
+            _rb.velocity = new Vector2(_frameVelocity.x,0);
+            yield return new WaitForFixedUpdate();
+        }
+
+        isDashing = false;
+        _frameVelocity.x = originalSpeed; 
+        yield return new WaitForSeconds(_stats.DashCooldown);
+        CanDash = true;
+    }
+
+    #endregion
+
     private void HandleDirection()
     {
         if (_frameInput.Move.x == 0)
@@ -175,8 +219,14 @@ public class PlayerMovement : MonoBehaviour
         {
             _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
         }
-    }
 
+        if (_frameVelocity.x != 0) {
+            m_spriteRenderer.flipX = _frameVelocity.x < 0;
+            Facingleft = _frameVelocity.x < 0;
+        } 
+
+
+    }
     private void HandleGravity()
     {
         if (_grounded && _frameVelocity.y <= 0f)
@@ -185,6 +235,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (isDashing)
+            {
+                return;
+            }
             var inAirGravity = _stats.FallAcceleration;
             if (_endedJumpEarly && _frameVelocity.y > 0) inAirGravity *= _stats.JumpEndEarlyGravityModifier;
             _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
@@ -192,6 +246,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void ApplyMovement() => _rb.velocity = _frameVelocity;
 
+    #region HFT
     void Remove()
     {
         if (deleteWhenDisconnected)
@@ -226,6 +281,7 @@ public class PlayerMovement : MonoBehaviour
         SetName(m_gamepad.Name);
     }
 
+    #endregion
 
 }
 

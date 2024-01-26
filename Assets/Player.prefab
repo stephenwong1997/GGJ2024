@@ -221,9 +221,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: fb4c6a43de868cd4c953862c29a91f5e, type: 2}
+  Facingleft: 0
   nameTransform: {fileID: 8234094159451261811}
   baseColor: {r: 0, g: 0, b: 0, a: 0}
   deleteWhenDisconnected: 1
+  CanDash: 1
+  isDashing: 0
 --- !u!1 &9000416106545909710
 GameObject:
   m_ObjectHideFlags: 0
