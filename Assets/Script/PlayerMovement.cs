@@ -90,14 +90,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (_frameInput.JumpDown)
         {
-            //Debug.Log("JumpDown");
+            Debug.Log("JumpDown");
             _jumpToConsume = true;
             _timeJumpWasPressed = _time;
         }
 
        if (_frameInput.SkillDown)
         {
-            //Debug.Log("SkillDown");
+            Debug.Log("SkillDown");
         }
 
         if (_frameInput.DashDown)
@@ -221,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (_frameVelocity.x != 0) {
-            m_spriteRenderer.flipX = _frameVelocity.x < 0;
+            m_spriteRenderer.flipX = _frameVelocity.x < 0; //Flip
             Facingleft = _frameVelocity.x < 0;
         } 
 
