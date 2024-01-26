@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0d763beb1174d3893e85e72fbae472, type: 3}
   m_Name: PlatformSpawnerSettingsSO
   m_EditorClassIdentifier: 
-  MinSpawnFrequency: 1.4
-  MaxSpawnFrequency: 2.5
+  MinSpawnFrequency: 2
+  MaxSpawnFrequency: 3
   PlatformPrefabs:
   - {fileID: 6017441187374012398, guid: e268cc0a928ce4be1a2956d89dcc2a2b, type: 3}
   - {fileID: 1982886950881517583, guid: 01450931158864b738e6b4ccf44497cd, type: 3}
@@ -24,4 +24,4 @@ MonoBehaviour:
   - {fileID: 3944778758869935115, guid: 89d1efdfd3a5346f8a8d453e7c007b6e, type: 3}
   - {fileID: 4447588327051957244, guid: de4a5854249494a3cba1ce77515ef45a, type: 3}
   - {fileID: 6578776283246282139, guid: 06a4e03a5e88e41958f663232758246a, type: 3}
-  PlatformSpeed: 5
+  PlatformSpeed: 3
