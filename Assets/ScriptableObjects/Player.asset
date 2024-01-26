@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4abe5567cfffa46b7f9d7f0820657f, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  OneWayPlatformLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  MaxSpeed: 25
+  Acceleration: 60
+  GroundDeceleration: 60
+  AirDeceleration: 79.6
+  GroundingForce: -0.5
+  GrounderDistance: 0.05
+  JumpPower: 36
+  MaxFallSpeed: 40
+  FallAcceleration: 110
+  JumpEndEarlyGravityModifier: 3
+  CoyoteTime: 0.15
+  JumpBuffer: 0.2
