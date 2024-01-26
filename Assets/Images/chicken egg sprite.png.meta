@@ -1,0 +1,669 @@
+fileFormatVersion: 2
+guid: ca9afb995b0e71c49a63614d3696b158
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: chicken egg sprite_0
+      rect:
+        serializedVersion: 2
+        x: 1767
+        y: 3141
+        width: 375
+        height: 248
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c77737a18c28d4f4a9837b945d557340
+      internalID: -2112194173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_1
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 2663
+        width: 465
+        height: 315
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a054317aef50274e92e5d88619754d9
+      internalID: 1794237041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_2
+      rect:
+        serializedVersion: 2
+        x: 1767
+        y: 2769
+        width: 375
+        height: 248
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 321bd6b42175e454cae41bac6f2a32e8
+      internalID: -418946001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_3
+      rect:
+        serializedVersion: 2
+        x: 2239
+        y: 2795
+        width: 36
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42a9eec6a346a7741abf34ec8095427b
+      internalID: -366251581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_6
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 2325
+        width: 159
+        height: 204
+      alignment: 9
+      pivot: {x: 0.37685794, y: 0.96069694}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 128c72fab49ccbf4bbc0bfc9508cb596
+      internalID: 977916692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_7
+      rect:
+        serializedVersion: 2
+        x: 1724
+        y: 2339
+        width: 248
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 352c31ea9d094a9449d5c11679797b4b
+      internalID: 1304696717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_8
+      rect:
+        serializedVersion: 2
+        x: 1822
+        y: 2031
+        width: 236
+        height: 207
+      alignment: 9
+      pivot: {x: 0.11291504, y: 0.94712055}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fbda729e4f618a40b6dc1a53b4acfa3
+      internalID: 1515902757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_9
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 2221
+        width: 129
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cb3373d9567e524cb059d19fc79e83d
+      internalID: -601873520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_10
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 2056
+        width: 57
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d94ac6be9aae951419a0e06a478014df
+      internalID: -1808005383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_11
+      rect:
+        serializedVersion: 2
+        x: 1103
+        y: 2053
+        width: 57
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6100fd2f29c4a641a3e021f6b09372c
+      internalID: 424780446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_12
+      rect:
+        serializedVersion: 2
+        x: 2239
+        y: 2017
+        width: 94
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94744e4345270e3458989ac7a4a6b90b
+      internalID: -1235406206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_13
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 1924
+        width: 57
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fec775265ed35444ba1f74c925602fc
+      internalID: -221356416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_14
+      rect:
+        serializedVersion: 2
+        x: 1103
+        y: 1921
+        width: 57
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8cd4bde05d1b0946b64e9466a6d4565
+      internalID: -1184680185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_15
+      rect:
+        serializedVersion: 2
+        x: 2255
+        y: 1856
+        width: 80
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dca928cc21566842bc6eafa84222ad4
+      internalID: 475624708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_16
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 1407
+        width: 423
+        height: 411
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9eb3a70332d40e41868be953470387a
+      internalID: -2045688082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_17
+      rect:
+        serializedVersion: 2
+        x: 1724
+        y: 1745
+        width: 99
+        height: 171
+      alignment: 9
+      pivot: {x: 0.38579643, y: 0.9568171}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7882d9b29f989a54ca71917fbf04006d
+      internalID: 2004751461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_18
+      rect:
+        serializedVersion: 2
+        x: 1972
+        y: 1738
+        width: 101
+        height: 162
+      alignment: 9
+      pivot: {x: 0.15399593, y: 0.9631619}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 547c2d7cd0acd8b4c9494ede129c6407
+      internalID: -1101300959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_19
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 1065
+        width: 476
+        height: 284
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27d9e12ee1deaf6409b58d37ebd93fcc
+      internalID: -1534680838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_20
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 1059
+        width: 454
+        height: 453
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a9c84b85c15de0408a320c7c726040f
+      internalID: -2098679637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_21
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 854
+        width: 121
+        height: 87
+      alignment: 9
+      pivot: {x: 1, y: 1.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84047df86aab34e47948103640d38a02
+      internalID: -1108029399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_22
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 856
+        width: 120
+        height: 87
+      alignment: 9
+      pivot: {x: 0, y: 1.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 654acc7f94e4ec44ea84175e3371106b
+      internalID: 1562198770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_23
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 93
+        width: 477
+        height: 610
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10b97b47f5f379e4c9edf4e5fd655f6b
+      internalID: -1140148383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_24
+      rect:
+        serializedVersion: 2
+        x: 1671
+        y: 102
+        width: 491
+        height: 688
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7b9d197bc2f5be43994d875398f97fb
+      internalID: 1687474093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chicken egg sprite_4
+      rect:
+        serializedVersion: 2
+        x: 2198
+        y: 2433
+        width: 129
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7d9df69958d20741b9fd7fae3023d42
+      internalID: 159140174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      chicken egg sprite_0: -2112194173
+      chicken egg sprite_1: 1794237041
+      chicken egg sprite_10: -1808005383
+      chicken egg sprite_11: 424780446
+      chicken egg sprite_12: -1235406206
+      chicken egg sprite_13: -221356416
+      chicken egg sprite_14: -1184680185
+      chicken egg sprite_15: 475624708
+      chicken egg sprite_16: -2045688082
+      chicken egg sprite_17: 2004751461
+      chicken egg sprite_18: -1101300959
+      chicken egg sprite_19: -1534680838
+      chicken egg sprite_2: -418946001
+      chicken egg sprite_20: -2098679637
+      chicken egg sprite_21: -1108029399
+      chicken egg sprite_22: 1562198770
+      chicken egg sprite_23: -1140148383
+      chicken egg sprite_24: 1687474093
+      chicken egg sprite_3: -366251581
+      chicken egg sprite_4: 159140174
+      chicken egg sprite_5: 761135661
+      chicken egg sprite_6: 977916692
+      chicken egg sprite_7: 1304696717
+      chicken egg sprite_8: 1515902757
+      chicken egg sprite_9: -601873520
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
