@@ -17,7 +17,7 @@ public class SimpleController : MonoBehaviour
 
     private void Start()
     {
-        // ¨Ï¥Î BoxCast ¶i¦æ¦a­±ÀË´ú
+        // ï¿½Ï¥ï¿½ BoxCast ï¿½iï¿½ï¿½aï¿½ï¿½ï¿½Ë´ï¿½
         detectionSize = col.bounds.size;
         groundCheckOffset.y = -col.bounds.size.y / 2;
         detectionSize.y = .05f;
@@ -33,10 +33,13 @@ public class SimpleController : MonoBehaviour
 
         bool isGrounded = IsGrounded();
 
-        displayController.SetBool("IsGrounded", isGrounded);
-        displayController.SetBool("IsRunning", xInput != 0);
-        if (xInput != 0)
-            displayController.flipX = xInput < 0;
+        if (displayController != null)
+        {
+            displayController.SetBool("IsGrounded", isGrounded);
+            displayController.SetBool("IsRunning", xInput != 0);
+            if (xInput != 0)
+                displayController.flipX = xInput < 0;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -46,12 +49,12 @@ public class SimpleController : MonoBehaviour
     private bool IsGrounded()
     {
         Vector2 position = transform.position;
-        position += groundCheckOffset; // ­pºâÀË´ú°_ÂI
+        position += groundCheckOffset; // ï¿½pï¿½ï¿½ï¿½Ë´ï¿½ï¿½_ï¿½I
 
         RaycastHit2D hit = Physics2D.BoxCast(position, detectionSize, 0f, Vector2.down, 0.05f, groundLayer);
-        return hit.collider != null; // ¦pªG¸I¨ì¬Yª««hµø¬°¦b¦a­±¤W
+        return hit.collider != null; // ï¿½pï¿½Gï¿½Iï¿½ï¿½Yï¿½ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½bï¿½aï¿½ï¿½ï¿½W
     }
-    void OnDrawGizmos() // ·s¼W - ¦b Unity ½s¿è¾¹¤¤Ã¸»sÀË´ú½d³ò¡AÀ°§U½Õ¸Õ
+    void OnDrawGizmos() // ï¿½sï¿½W - ï¿½b Unity ï¿½sï¿½è¾¹ï¿½ï¿½Ã¸ï¿½sï¿½Ë´ï¿½ï¿½dï¿½ï¿½Aï¿½ï¿½ï¿½Uï¿½Õ¸ï¿½
     {
         Gizmos.color = Color.red;
         Vector2 position = transform.position;
