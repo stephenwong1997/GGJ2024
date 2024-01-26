@@ -106,7 +106,8 @@ public class PlayerMovement : MonoBehaviour
 
         bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.OneWayPlatformLayer);
         bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.GroundLayer) || 
-                                        Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.OneWayPlatformLayer);
+                                        Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.OneWayPlatformLayer) ||
+                                        Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.PlayerLayer);
 
         if (ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
 

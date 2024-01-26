@@ -16,8 +16,7 @@ GameObject:
   - component: {fileID: 4202356659496791445}
   - component: {fileID: 3081154691337394524}
   - component: {fileID: 5156266382028253304}
-  - component: {fileID: 4285638730312176137}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.46, y: -0.46, z: 0}
-  m_LocalScale: {x: 0.9752381, y: 1.0418605, z: 1}
+  m_LocalScale: {x: 0.7166439, y: 0.76560074, z: 0.73484}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8234094159451261811}
@@ -140,9 +139,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 10
   m_Material: {fileID: 6200000, guid: a081f785d315a2b43966f129ce852878, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -221,40 +220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e86dfe1075fc37499cca858a6d05154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stats: {fileID: 11400000, guid: fb4c6a43de868cd4c953862c29a91f5e, type: 2}
   nameTransform: {fileID: 8234094159451261811}
-  PlayerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  SnapInput: 1
-  VerticalDeadZoneThreshold: 0.3
-  HorizontalDeadZoneThreshold: 0.1
-  MaxSpeed: 14
-  Acceleration: 120
-  GroundDeceleration: 60
-  AirDeceleration: 30
-  GroundingForce: -1.5
-  GrounderDistance: 0.05
-  JumpPower: 36
-  MaxFallSpeed: 40
-  FallAcceleration: 110
-  JumpEndEarlyGravityModifier: 3
-  CoyoteTime: 0.15
-  JumpBuffer: 0.2
-  deleteWhenDisconnected: 1
   baseColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &4285638730312176137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3801394175375434853}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f571a585b3fce1f459ef4933a5661648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
+  deleteWhenDisconnected: 1
 --- !u!1 &9000416106545909710
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8234094159451261811}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NamePosition
   m_TagString: Untagged
   m_Icon: {fileID: 1182211791, guid: 0000000000000000d000000000000000, type: 0}
