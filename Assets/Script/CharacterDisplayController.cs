@@ -6,6 +6,7 @@ public class CharacterDisplayController : MonoBehaviour
 {
     [SerializeField] private List<SpriteRenderer> coloredParts;
     [SerializeField] Animator animator;
+    [SerializeField] WeaponContoller weaponController;
     public bool flipX = false;
     public Vector3 originalScale;
     public Color preferredColor;

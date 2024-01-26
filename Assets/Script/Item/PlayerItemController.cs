@@ -72,7 +72,7 @@ public class PlayerItemController : MonoBehaviour
         }
 
         _equippedItem.Use(_itemContext);
-        DiscardEquippedItem();
+        //DiscardEquippedItem();
     }
 
     private void SetEquippedItem(IEquippedItem item)

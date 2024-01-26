@@ -32,9 +32,12 @@ public class RocketItem : IEquippedItem
 public class Rocket : MonoBehaviour, IItemPrefab
 {
     [SerializeField] private float _speed;
+    [SerializeField] private float _explosionForce;
+    [SerializeField] private float _explosionRadius;
 
     private Rigidbody2D _rigidbody;
     private Vector2 _moveDirection = Vector2.zero;
+    [SerializeField] private GameObject explosionParticle;
 
     // MonoBehaviour METHODS
     private void Awake()
@@ -43,16 +46,65 @@ public class Rocket : MonoBehaviour, IItemPrefab
     }
 
     // TODO : OnCollision handling
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Instantiate(explosionParticle, transform.position, Quaternion.identity);
+        Explode();
+        Destroy(this.gameObject);
+    }
+    private void Explode()
+    {
+        Vector3 explosionPos = transform.position;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionPos, _explosionRadius);
+        foreach (Collider2D hit in colliders)
+        {
+            Rigidbody2D rb = hit.GetComponent<Rigidbody2D>();
 
+            if (rb != null)
+                rb.AddExplosionForce(_explosionForce, explosionPos, _explosionRadius, 3.0F);
+        }
+    }
     // PUBLIC METHODS
     public void SetMoveDirection(Vector2 direction)
     {
         _moveDirection = direction;
         // TODO : Update rotation
     }
+    private void Update()
+    {
+        Vector2 velocity = _rigidbody.velocity.normalized;
+        print(velocity);
+        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+
+        _rigidbody.AddForce(velocity * 5.5f);
+        print(angle);
+    }
 
     public void StartMoving()
     {
         _rigidbody.velocity = _speed * _moveDirection.normalized;
+    }
+}
+public static class Rigidbody2DExtension
+{
+    public static void AddExplosionForce(this Rigidbody2D body, float explosionForce, Vector3 explosionPosition, float explosionRadius)
+    {
+        var dir = (body.transform.position - explosionPosition);
+        float wearoff = 1 - (dir.magnitude / explosionRadius);
+        body.AddForce(dir.normalized * explosionForce * wearoff);
+    }
+
+    public static void AddExplosionForce(this Rigidbody2D body, float explosionForce, Vector3 explosionPosition, float explosionRadius, float upliftModifier)
+    {
+        var dir = (body.transform.position - explosionPosition);
+        float wearoff = 1 - (dir.magnitude / explosionRadius);
+        Vector3 baseForce = dir.normalized * explosionForce * wearoff;
+        body.AddForce(baseForce);
+
+        float upliftWearoff = 1 - upliftModifier / explosionRadius;
+        Vector3 upliftForce = Vector2.up * explosionForce * upliftWearoff;
+        body.AddForce(upliftForce);
     }
 }
