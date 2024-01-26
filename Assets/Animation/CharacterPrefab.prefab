@@ -32,6 +32,14 @@ PrefabInstance:
       propertyPath: _displayController.Array.data[1]
       value: 
       objectReference: {fileID: 7502232209306456633}
+    - target: {fileID: 4181464654872824803, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010756027549728429, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7178638460472681733, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -40,13 +48,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7530450794520475202, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530450794520475202, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.059
+      objectReference: {fileID: 0}
     - target: {fileID: 7858538787354062071, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
       propertyPath: m_Name
       value: CharacterPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 7858538787354062071, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7858538787354062072, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
       propertyPath: m_LocalScale.x
@@ -144,6 +160,18 @@ PrefabInstance:
     - target: {fileID: 2341322341133333226, guid: bec5822ac21bddf4bb7ae87cc25aa254, type: 3}
       propertyPath: m_Name
       value: EggChick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341322341133333226, guid: bec5822ac21bddf4bb7ae87cc25aa254, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258118254380079369, guid: bec5822ac21bddf4bb7ae87cc25aa254, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.396
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258118254380079369, guid: bec5822ac21bddf4bb7ae87cc25aa254, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.338
       objectReference: {fileID: 0}
     - target: {fileID: 3922484616755432325, guid: bec5822ac21bddf4bb7ae87cc25aa254, type: 3}
       propertyPath: m_LocalPosition.x
