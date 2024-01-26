@@ -27,36 +27,16 @@ public class FloatingItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log($"FloatingItem.OnTriggerEnter2D: {col.gameObject.name}");
-
         var itemController = col.GetComponentInChildren<PlayerItemController>();
         if (itemController == null)
             return;
 
         IItemPrefab itemPrefab = _itemPrefab.GetComponent<IItemPrefab>();
-        IItem item = ItemFactory.CreateItem(_itemType, itemPrefab);
+        IEquippedItem item = EquippedItemFactory.Create(_itemType, itemPrefab);
 
         itemController.EquipItem(item);
-    }
-}
 
-public enum EItemType
-{
-    Rocket = 0
-}
-
-public static class ItemFactory
-{
-    public static IItem CreateItem(EItemType itemType, IItemPrefab prefab)
-    {
-        if (prefab == null)
-            throw new InvalidOperationException($"ItemFactory.CreateItem: prefab null! type: {itemType}");
-
-        switch (itemType)
-        {
-            case EItemType.Rocket: return new RocketItem((Rocket)prefab);
-        }
-
-        throw new NotImplementedException($"ItemFactory.CreateItem: Did not handle type {itemType}!");
+        // Use object pool... later if needed~
+        Destroy(this.gameObject);
     }
 }

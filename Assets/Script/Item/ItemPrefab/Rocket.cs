@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketItem : IItem
+public class RocketItem : IEquippedItem
 {
     private Rocket _rocketPrefab;
 
@@ -14,13 +14,16 @@ public class RocketItem : IItem
     public void Use(IItemContext context)
     {
         Vector2 fireDirection = context.IsFacingLeft ? Vector2.left : Vector2.right;
-        SpawnRocket(fireDirection);
+        SpawnRocket(context.SpawnPosition, fireDirection);
     }
 
-    private void SpawnRocket(Vector2 fireDirection)
+    private void SpawnRocket(Vector2 spawnPosition, Vector2 fireDirection)
     {
         Rocket rocketInstance = GameObject.Instantiate(_rocketPrefab);
-        rocketInstance.SetDirection(fireDirection);
+
+        rocketInstance.transform.position = spawnPosition;
+
+        rocketInstance.SetMoveDirection(fireDirection);
         rocketInstance.StartMoving();
     }
 }
@@ -42,7 +45,7 @@ public class Rocket : MonoBehaviour, IItemPrefab
     // TODO : OnCollision handling
 
     // PUBLIC METHODS
-    public void SetDirection(Vector2 direction)
+    public void SetMoveDirection(Vector2 direction)
     {
         _moveDirection = direction;
         // TODO : Update rotation
