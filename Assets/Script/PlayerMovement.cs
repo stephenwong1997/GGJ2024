@@ -7,10 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] private ScriptableStats _stats;
+    [SerializeField] private List<GameObject> chickenOrEgg; //chicken = 0, egg = 1
 
-
+    [SerializeField] private CharacterDisplayController _displayController;
     private Rigidbody2D _rb;
-    private CapsuleCollider2D _col;
+    private CircleCollider2D _col;
     private FrameInput _frameInput;
     private Vector2 _frameVelocity;
     public bool Facingleft;
@@ -36,8 +37,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        m_playerNumber++;
+        chickenOrEgg[m_playerNumber % 2].SetActive(true);
+        _displayController = GetComponentInChildren<CharacterDisplayController>();
         _rb = GetComponent<Rigidbody2D>();
-        _col = GetComponent<CapsuleCollider2D>();
+        _col = GetComponent<CircleCollider2D>();
         _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
         m_hftInput = GetComponent<HFTInput>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();
@@ -52,7 +56,17 @@ public class PlayerMovement : MonoBehaviour
     {
         _time += Time.deltaTime;
         GatherInput();
+        UpdateDisplayController();
     }
+
+    private void UpdateDisplayController()
+    {
+        _displayController.SetBool("IsGrounded", _grounded);
+        _displayController.SetBool("IsRunning", _frameVelocity.x != 0);
+        if (_frameVelocity.x != 0)
+            _displayController.flipX = _frameVelocity.x < 0;
+    }
+
     private void FixedUpdate()
     {
         CheckCollisions();
@@ -66,7 +80,8 @@ public class PlayerMovement : MonoBehaviour
     private void GatherInput()
     {
 
-        if (isDashing) {
+        if (isDashing)
+        {
             return;
         }
 
@@ -95,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
             _timeJumpWasPressed = _time;
         }
 
-       if (_frameInput.SkillDown)
+        if (_frameInput.SkillDown)
         {
             Debug.Log("SkillDown");
         }
@@ -112,16 +127,19 @@ public class PlayerMovement : MonoBehaviour
     #region Collisions
 
     private float _frameLeftGrounded = float.MinValue;
-    private bool _grounded;
+    [SerializeField] private bool _grounded;
 
     private void CheckCollisions()
     {
         Physics2D.queriesStartInColliders = false;
-
-        bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.OneWayPlatformLayer);
-        bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.GroundLayer) ||
-                                        Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.OneWayPlatformLayer) ||
-                                        Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, _stats.PlayerLayer);
+        //public static RaycastHit2D CircleCast(Vector2 origin, float radius, Vector2 direction, float distance, int layerMask, float minDepth);
+        //CapsuleCollider2D a = null;
+        //bool ceilindgHit = Physics2D.CapsuleCast(a.bounds.center, a.size, a.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.OneWayPlatformLayer);
+        float radius = _col.bounds.extents.x;
+        bool ceilingHit = Physics2D.CircleCast(_col.bounds.center, radius, Vector2.up, _stats.GrounderDistance, ~_stats.OneWayPlatformLayer);
+        bool groundHit = Physics2D.CircleCast(_col.bounds.center, radius, Vector2.down, _stats.GrounderDistance, _stats.GroundLayer) ||
+                 Physics2D.CircleCast(_col.bounds.center, radius, Vector2.down, _stats.GrounderDistance, _stats.OneWayPlatformLayer) ||
+                 Physics2D.CircleCast(_col.bounds.center, radius, Vector2.down, _stats.GrounderDistance, _stats.PlayerLayer);
 
         if (ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
 
@@ -182,26 +200,26 @@ public class PlayerMovement : MonoBehaviour
     public bool CanDash = true;
     public bool isDashing;
 
-        private IEnumerator Dash()
+    private IEnumerator Dash()
     {
         Debug.Log("Dash");
         CanDash = false;
         isDashing = true;
 
-        float targetDashSpeed = _stats.DashSpeed * (Facingleft ? -1 : 1); 
-        float originalSpeed = _rb.velocity.x; 
+        float targetDashSpeed = _stats.DashSpeed * (Facingleft ? -1 : 1);
+        float originalSpeed = _rb.velocity.x;
         float dashTime = 0;
 
         while (dashTime < _stats.DashDuration)
         {
             dashTime += Time.fixedDeltaTime;
             _frameVelocity.x = Mathf.MoveTowards(originalSpeed, targetDashSpeed, dashTime / _stats.DashDuration * _stats.DashSpeed);
-            _rb.velocity = new Vector2(_frameVelocity.x,0);
+            _rb.velocity = new Vector2(_frameVelocity.x, 0);
             yield return new WaitForFixedUpdate();
         }
 
         isDashing = false;
-        _frameVelocity.x = originalSpeed; 
+        _frameVelocity.x = originalSpeed;
         yield return new WaitForSeconds(_stats.DashCooldown);
         CanDash = true;
     }
@@ -220,10 +238,11 @@ public class PlayerMovement : MonoBehaviour
             _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
         }
 
-        if (_frameVelocity.x != 0) {
-            m_spriteRenderer.flipX = _frameVelocity.x < 0; //Flip
+        if (_frameVelocity.x != 0)
+        {
+            //m_spriteRenderer.flipX = _frameVelocity.x < 0; //Flip
             Facingleft = _frameVelocity.x < 0;
-        } 
+        }
 
 
     }

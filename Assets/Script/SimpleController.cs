@@ -13,6 +13,7 @@ public class SimpleController : MonoBehaviour
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] Collider2D col;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] CharacterDisplayController displayController;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class SimpleController : MonoBehaviour
         detectionSize = col.bounds.size;
         groundCheckOffset.y = -col.bounds.size.y / 2;
         detectionSize.y = .05f;
+        displayController = GetComponent<CharacterDisplayController>();
     }
 
     void Update()
@@ -29,7 +31,14 @@ public class SimpleController : MonoBehaviour
         velocity.x = xInput * movementSpeed;
         rigid.velocity = velocity;
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        bool isGrounded = IsGrounded();
+
+        displayController.SetBool("IsGrounded", isGrounded);
+        displayController.SetBool("IsRunning", xInput != 0);
+        if (xInput != 0)
+            displayController.flipX = xInput < 0;
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rigid.AddForce(Vector2.up * jumpForce);
         }
