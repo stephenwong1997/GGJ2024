@@ -70,15 +70,34 @@ public class GameManager : MonoBehaviour
 
     private async UniTask UpdateSettingsFromJoystickAsync()
     {
+        /*
+        It works!
+        Just disabling the feature now cuz we're rapidly prototyping locally.
+        */
+        Debug.Log("GameManager: Ignoring Settings from Joystick...");
+        return;
+        /*
+        Can enable again later if needed~
+        */
+
         Debug.Log("GameManager: Update settings from joystick...");
 
-        await API.GetJoystickSettingsAsync();
+        var settings = await API.GetJoystickSettingsAsync();
+        if (settings == null)
+            return;
 
         // Create a clone because not all settings need to be overriden
         PlatformSpawnerSettingsSO settingsClone = Instantiate(PlatformSpawner.Setting);
 
-        // TODO : Override settings as needed
-        settingsClone.TotalGameTime = 2f;
+        Debug.Log($"Updated Game Time: {settings.totalGameTime}");
+        Debug.Log($"Updated Platform Speed: {settings.platformSpeed}");
+
+        settingsClone.MinSpawnFrequency = settings.minSpawnFrequency;
+        settingsClone.MaxSpawnFrequency = settings.maxSpawnFreqeuncy;
+        settingsClone.TotalGameTime = settings.totalGameTime;
+        settingsClone.SpawnFinishLineDelay = settings.spawnFinishLineDelay;
+        settingsClone.PlatformSpeed = settings.platformSpeed;
+        settingsClone.ItemSpawnProbability = settings.itemSpawnProbability;
 
         _platformSpawner.OverrideSettings(settingsClone);
 
