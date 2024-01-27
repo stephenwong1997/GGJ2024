@@ -290,6 +290,7 @@ public class PlayerMovement : MonoBehaviour
             _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
         }
     }
+    public bool isSlowed = false;
     private void ApplyMovement() => _rb.velocity = _frameVelocity;
 
     #region HFT

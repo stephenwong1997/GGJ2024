@@ -36,6 +36,10 @@ PrefabInstance:
       propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1170800588515435844, guid: 7fb56f718e6b94d43b06e94c86f6b3dc, type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1357641362919103058, guid: 7fb56f718e6b94d43b06e94c86f6b3dc, type: 3}
       propertyPath: looping
       value: 0
@@ -390,6 +394,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7902346825192197691, guid: 7fb56f718e6b94d43b06e94c86f6b3dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3065444311833520996}
+    - targetCorrespondingSourceObject: {fileID: 7902346825192197691, guid: 7fb56f718e6b94d43b06e94c86f6b3dc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2652734179797582647}
   m_SourcePrefab: {fileID: 100100000, guid: 7fb56f718e6b94d43b06e94c86f6b3dc, type: 3}
 --- !u!1 &3476576312195446999 stripped
 GameObject:
@@ -437,3 +444,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-2652734179797582647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3476576312195446999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0039dcf936dad4386b5104b213893ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionRadius: 5
+  _explosionForce: 600
