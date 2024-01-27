@@ -13,6 +13,7 @@ public static class EquippedItemFactory
             case EItemType.Grenade: return new GrenadeItem((Grenade)prefab);
             case EItemType.Poop: return new FallingPoopItem((FallingPoop)prefab);
             case EItemType.LandMine: return new LandMineItem((LandMine)prefab);
+            case EItemType.BouncyBed: return new BouncyBedItem((FallingBouncyBed)prefab);
         }
 
         throw new NotImplementedException($"ItemFactory.CreateItem: Did not handle type {itemType}!");
