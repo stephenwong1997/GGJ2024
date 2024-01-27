@@ -63,8 +63,10 @@ public class PlatformSpawner : MonoBehaviour
         platformInstance.transform.position = _spawnPoint.position;
         platformInstance.transform.rotation = Quaternion.identity;
 
-        platformInstance.SetSettings(_settings);
+        platformInstance.SetSettings(_settings); // Must set this first!
         platformInstance.SetDestroyPosition(_destroyPoint.position);
+        platformInstance.SpawnRandomItems();
+
         platformInstance.StartMoving();
     }
 }

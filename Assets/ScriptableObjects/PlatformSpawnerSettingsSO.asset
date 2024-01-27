@@ -25,3 +25,7 @@ MonoBehaviour:
   - {fileID: 4447588327051957244, guid: de4a5854249494a3cba1ce77515ef45a, type: 3}
   - {fileID: 6578776283246282139, guid: 06a4e03a5e88e41958f663232758246a, type: 3}
   PlatformSpeed: 5
+  ItemSpawnProbability: 1
+  FloatingItemPrefabs:
+  - {fileID: 226799456078191135, guid: 0bff972c8d62e48ecb11e934cf59da21, type: 3}
+  - {fileID: 226799456078191135, guid: ecf5dce5bdfd64444ae0f02b94bfe86c, type: 3}

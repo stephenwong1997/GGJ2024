@@ -47,6 +47,9 @@ public class RespawnManager : MonoBehaviour
     {
         foreach (Transform targetTransform in _targetTransforms)
         {
+            if (targetTransform == null)
+                continue;
+
             if (
                 targetTransform.position.x < _leftEdge.position.x ||
                 targetTransform.position.x > _rightEdge.position.x ||
