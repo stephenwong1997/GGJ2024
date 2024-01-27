@@ -89,8 +89,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _displayController.SetBool("IsGrounded", _grounded);
         _displayController.SetBool("IsRunning", _frameVelocity.x != 0);
-        if (_frameVelocity.x != 0)
-            _displayController.flipX = _frameVelocity.x < 0;
+        _displayController.flipX = Facingleft;
     }
 
     private void FixedUpdate()
@@ -98,8 +97,6 @@ public class PlayerMovement : MonoBehaviour
         CheckCollisions();
         HandleJump();
         HandleDirection();
-        ApplyMovement();
-        HandleGravity();
     }
 
     #region Input
@@ -217,8 +214,7 @@ public class PlayerMovement : MonoBehaviour
         _timeJumpWasPressed = 0;
         _bufferedJumpUsable = false;
         _coyoteUsable = false;
-        _frameVelocity.y = _stats.JumpPower;
-        //_rb.AddForce(new Vector2(0, _stats.JumpPower), ForceMode2D.Impulse);
+        _rb.AddForce(new Vector2(0, _stats.JumpPower), ForceMode2D.Impulse);
     }
 
     #endregion
@@ -233,21 +229,22 @@ public class PlayerMovement : MonoBehaviour
         CanDash = false;
         isDashing = true;
 
-        float targetDashSpeed = _stats.DashSpeed * (Facingleft ? -1 : 1);
-        float originalSpeed = _rb.velocity.x;
-        float dashTime = 0;
+        Vector2 dashForce = new Vector2((Facingleft ? -1 : 1) * _stats.DashSpeed, 0);
+        float orgGS = _rb.gravityScale;
 
-        while (dashTime < _stats.DashDuration)
-        {
-            dashTime += Time.fixedDeltaTime;
-            _frameVelocity.x = Mathf.MoveTowards(originalSpeed, targetDashSpeed, dashTime / _stats.DashDuration * _stats.DashSpeed);
-            _rb.velocity = new Vector2(_frameVelocity.x, 0);
-            yield return new WaitForFixedUpdate();
-        }
 
+        _rb.velocity = new Vector2(0, 0);
+        _rb.gravityScale = 0f;
+        _rb.AddForce(dashForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(_stats.DashDuration);
+        _rb.velocity = new Vector2(0, _rb.velocity.y);
+        _rb.gravityScale = orgGS;
         isDashing = false;
-        _frameVelocity.x = originalSpeed;
+
+        // Wait for dash cooldown
         yield return new WaitForSeconds(_stats.DashCooldown);
+
         CanDash = true;
     }
 
@@ -255,43 +252,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleDirection()
     {
-        if (_frameInput.Move.x == 0)
+        float targetSpeed = _frameInput.Move.x * _stats.MoveSpeed;
+        Debug.Log("_frameInput.Move.x" + _frameInput.Move.x + "_stats.MaxSpeed" + _stats.MoveSpeed);
+        float speedDif = targetSpeed - _rb.velocity.x;
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _stats.Acceleration : _stats.Decceleration;
+        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, _stats.velPower) * Mathf.Sign(speedDif);
+
+
+        if (targetSpeed != 0)
         {
-            var deceleration = _grounded ? _stats.GroundDeceleration : _stats.AirDeceleration;
-            _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, 0, deceleration * Time.fixedDeltaTime);
-        }
-        else
-        {
-            _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
+            Facingleft = targetSpeed < 0;
         }
 
-        if (_frameVelocity.x != 0)
-        {
-            //m_spriteRenderer.flipX = _frameVelocity.x < 0; //Flip
-            Facingleft = _frameVelocity.x < 0;
-        }
-
+        _rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
 
     }
-    private void HandleGravity()
-    {
-        if (_grounded && _frameVelocity.y <= 0f)
-        {
-            _frameVelocity.y = _stats.GroundingForce;
-        }
-        else
-        {
-            if (isDashing)
-            {
-                return;
-            }
-            var inAirGravity = _stats.FallAcceleration;
-            if (_endedJumpEarly && _frameVelocity.y > 0) inAirGravity *= _stats.JumpEndEarlyGravityModifier;
-            _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
-        }
-    }
+
     public bool isSlowed = false;
-    private void ApplyMovement() => _rb.velocity = _frameVelocity;
+
 
     #region HFT
     void Remove()
