@@ -88,16 +88,17 @@ public class PlayerMovement : MonoBehaviour
         {
             AudioManager.instance.PlayOnUnusedTrack("chicken_nc148163", 0.7f);
         }
-        else {
+        else
+        {
             AudioManager.instance.PlayOnUnusedTrack("egg_nc261748", 0.7f);
         }
 
     }
 
-        private void UpdateDisplayController()
+    private void UpdateDisplayController()
     {
         _displayController.SetBool("IsGrounded", _grounded);
-        _displayController.SetBool("IsRunning", _frameVelocity.x != 0);
+        _displayController.SetBool("IsRunning", _rb.velocity.x < -0.5f || _rb.velocity.x > 0.5f);
         _displayController.flipX = Facingleft;
     }
 
@@ -265,12 +266,12 @@ public class PlayerMovement : MonoBehaviour
     public void GetSlowed()
     {
         //Debug.Log("GetSlowed");
-        AudioManager.instance.PlayOnUnusedTrack("StepShit",1f);
+        AudioManager.instance.PlayOnUnusedTrack("StepShit", 1f);
         isSlowed = true;
     }
     public void GetOffSlowed()
     {
-     //  Debug.Log("GetOffSlowed");
+        //  Debug.Log("GetOffSlowed");
         isSlowed = false;
     }
 
@@ -279,10 +280,11 @@ public class PlayerMovement : MonoBehaviour
         float targetSpeed;
         if (isSlowed)
         {
-             targetSpeed = _frameInput.Move.x * _stats.SlowedSpeed;
+            targetSpeed = _frameInput.Move.x * _stats.SlowedSpeed;
         }
-        else {
-             targetSpeed = _frameInput.Move.x * _stats.MoveSpeed;
+        else
+        {
+            targetSpeed = _frameInput.Move.x * _stats.MoveSpeed;
         }
 
 
