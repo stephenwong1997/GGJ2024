@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIController _uiController;
     [SerializeField] private GameObject _qrCodeParent;
     [SerializeField] private PlatformSpawner _platformSpawner;
+    [SerializeField] private List<GameObject> _setActiveOnGameStart;
 
     private bool _isGameReady = false;
 
@@ -51,6 +52,9 @@ public class GameManager : MonoBehaviour
         _qrCodeParent.SetActive(true);
         _platformSpawner.gameObject.SetActive(false);
 
+        foreach (var go in _setActiveOnGameStart)
+            go.SetActive(false);
+
         if (_updateSettingsFromJoystick)
         {
             await UpdateSettingsFromJoystickAsync();
@@ -66,19 +70,41 @@ public class GameManager : MonoBehaviour
     {
         _qrCodeParent.SetActive(false);
         _platformSpawner.gameObject.SetActive(true);
+
+        foreach (var go in _setActiveOnGameStart)
+            go.SetActive(true);
     }
 
     private async UniTask UpdateSettingsFromJoystickAsync()
     {
+        /*
+        It works!
+        Just disabling the feature now cuz we're rapidly prototyping locally.
+        */
+        Debug.Log("GameManager: Ignoring Settings from Joystick...");
+        return;
+        /*
+        Can enable again later if needed~
+        */
+
         Debug.Log("GameManager: Update settings from joystick...");
 
-        await API.GetJoystickSettingsAsync();
+        var settings = await API.GetJoystickSettingsAsync();
+        if (settings == null)
+            return;
 
         // Create a clone because not all settings need to be overriden
         PlatformSpawnerSettingsSO settingsClone = Instantiate(PlatformSpawner.Setting);
 
-        // TODO : Override settings as needed
-        settingsClone.TotalGameTime = 2f;
+        Debug.Log($"Updated Game Time: {settings.totalGameTime}");
+        Debug.Log($"Updated Platform Speed: {settings.platformSpeed}");
+
+        settingsClone.MinSpawnFrequency = settings.minSpawnFrequency;
+        settingsClone.MaxSpawnFrequency = settings.maxSpawnFreqeuncy;
+        settingsClone.TotalGameTime = settings.totalGameTime;
+        settingsClone.SpawnFinishLineDelay = settings.spawnFinishLineDelay;
+        settingsClone.PlatformSpeed = settings.platformSpeed;
+        settingsClone.ItemSpawnProbability = settings.itemSpawnProbability;
 
         _platformSpawner.OverrideSettings(settingsClone);
 
