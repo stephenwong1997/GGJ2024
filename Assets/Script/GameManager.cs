@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIController _uiController;
     [SerializeField] private GameObject _qrCodeParent;
     [SerializeField] private PlatformSpawner _platformSpawner;
+    [SerializeField] private List<GameObject> _setActiveOnGameStart;
 
     private bool _isGameReady = false;
 
@@ -51,6 +52,9 @@ public class GameManager : MonoBehaviour
         _qrCodeParent.SetActive(true);
         _platformSpawner.gameObject.SetActive(false);
 
+        foreach (var go in _setActiveOnGameStart)
+            go.SetActive(false);
+
         if (_updateSettingsFromJoystick)
         {
             await UpdateSettingsFromJoystickAsync();
@@ -66,6 +70,9 @@ public class GameManager : MonoBehaviour
     {
         _qrCodeParent.SetActive(false);
         _platformSpawner.gameObject.SetActive(true);
+
+        foreach (var go in _setActiveOnGameStart)
+            go.SetActive(true);
     }
 
     private async UniTask UpdateSettingsFromJoystickAsync()
