@@ -68,18 +68,15 @@ public class Rocket : MonoBehaviour, IItemPrefab
     public void SetMoveDirection(Vector2 direction)
     {
         _moveDirection = direction;
-        // TODO : Update rotation
+        Vector2 velocity = _moveDirection;
+        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
     private void Update()
     {
+
         Vector2 velocity = _rigidbody.velocity.normalized;
-        print(velocity);
-        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-
         _rigidbody.AddForce(velocity * 5.5f);
-        print(angle);
     }
 
     public void StartMoving()

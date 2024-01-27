@@ -93,8 +93,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6221770622511302204}
-  - component: {fileID: 3825542711328571799}
   - component: {fileID: 6541302797076747262}
+  - component: {fileID: 3825542711328571799}
   - component: {fileID: -3568992127492798897}
   m_Layer: 0
   m_Name: Rocket
@@ -120,6 +120,22 @@ Transform:
   - {fileID: 8899314561387166323}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6541302797076747262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302703749534235971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d72309faac04cdcb5fad6d11377db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 15
+  _explosionForce: 5000
+  _explosionRadius: 3
+  explosionParticle: {fileID: 183222, guid: 4561cb7e4f57a3646951d2bd6e566fc6, type: 3}
 --- !u!50 &3825542711328571799
 Rigidbody2D:
   serializedVersion: 4
@@ -147,22 +163,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6541302797076747262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3302703749534235971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0d72309faac04cdcb5fad6d11377db3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 15
-  _explosionForce: 5000
-  _explosionRadius: 50
-  explosionParticle: {fileID: 183222, guid: f2ee009e61b1177489331d95174281b1, type: 3}
 --- !u!58 &-3568992127492798897
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -178,7 +178,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 82970340735866730, guid: 32563c1c7ddb94746889e29751f49ec9, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fc612f5291ee38d40aca6265b7cd00af, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -10,6 +10,7 @@ public static class EquippedItemFactory
         switch (itemType)
         {
             case EItemType.Rocket: return new RocketItem((Rocket)prefab);
+            case EItemType.Grenade: return new GrenadeItem((Grenade)prefab);
         }
 
         throw new NotImplementedException($"ItemFactory.CreateItem: Did not handle type {itemType}!");

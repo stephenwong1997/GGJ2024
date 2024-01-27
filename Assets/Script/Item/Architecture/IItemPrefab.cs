@@ -1,4 +1,4 @@
 public interface IItemPrefab
 {
-    // Nothing for now
+    //nothing for now
 }
