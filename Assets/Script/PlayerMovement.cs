@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private static int m_playerNumber = 0;
 
 
-    private void Start()
+    private void Awake()
     {
         m_playerNumber++;
         chickenOrEgg[m_playerNumber % 2].SetActive(true);
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         m_gamepad.OnNameChange += ChangeName;
         m_gamepad.OnDisconnect += Remove;
         baseColor = m_gamepad.color;
-        m_spriteRenderer.color = baseColor;
+        //m_spriteRenderer.color = baseColor;
     }
     private void Update()
     {
