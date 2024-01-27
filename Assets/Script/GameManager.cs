@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager: Update settings from joystick...");
 
+        await API.GetJoystickSettingsAsync();
+
         // Create a clone because not all settings need to be overriden
         PlatformSpawnerSettingsSO settingsClone = Instantiate(PlatformSpawner.Setting);
 
