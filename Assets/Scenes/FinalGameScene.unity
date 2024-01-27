@@ -374,6 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50db4bb94bb10466fa89764bc50f8904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _updateSettingsFromJoystick: 0
   _uiController: {fileID: 1161767050}
   _qrCodeParent: {fileID: 1258144128}
   _platformSpawner: {fileID: 1117664921}

@@ -45,9 +45,9 @@ public class PlatformSpawner : MonoBehaviour
     }
 
     // PUBLIC METHODS
-    public void StopSpawning()
+    public void OverrideSettings(PlatformSpawnerSettingsSO settings)
     {
-        _isSpawning = false;
+        _settings = settings;
     }
 
     // PRIVATE METHODS

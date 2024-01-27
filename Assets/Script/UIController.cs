@@ -34,6 +34,9 @@ public class UIController : MonoBehaviour
 
     private void OnStartClicked()
     {
+        if (!GameManager.IsGameReady)
+            return;
+
         _titleScreenParent.SetActive(false);
     }
 
