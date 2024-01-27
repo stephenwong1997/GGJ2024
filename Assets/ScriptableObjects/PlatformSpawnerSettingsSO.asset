@@ -24,6 +24,9 @@ MonoBehaviour:
   - {fileID: 3944778758869935115, guid: 89d1efdfd3a5346f8a8d453e7c007b6e, type: 3}
   - {fileID: 4447588327051957244, guid: de4a5854249494a3cba1ce77515ef45a, type: 3}
   - {fileID: 6578776283246282139, guid: 06a4e03a5e88e41958f663232758246a, type: 3}
+  TotalGameTime: 3
+  SpawnFinishLineDelay: 2
+  FinishLinePrefab: {fileID: 6241072551693658935, guid: 1fc2278234df74916828de51bdb1bcf6, type: 3}
   PlatformSpeed: 5
   ItemSpawnProbability: 1
   FloatingItemPrefabs:

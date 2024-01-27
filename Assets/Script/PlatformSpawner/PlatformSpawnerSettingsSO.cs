@@ -10,6 +10,12 @@ public class PlatformSpawnerSettingsSO : ScriptableObject
     public float MaxSpawnFrequency;
     public List<MovingPlatform> PlatformPrefabs;
 
+    [Header("Finish Line Settings")]
+    public float TotalGameTime;
+    public float SpawnFinishLineDelay;
+    public MovingPlatform FinishLinePrefab;
+
+
     [Header("Individual Platform Settings")]
     public float PlatformSpeed;
 
@@ -27,6 +33,12 @@ public class PlatformSpawnerSettingsSO : ScriptableObject
 
         if (FloatingItemPrefabs.Count <= 0)
             Debug.LogError("PlatformSpawnerSettingsSO: No floating item prefabs!");
+
+        if (TotalGameTime <= 0)
+            Debug.LogError("PlatformSpawnerSettingsSO: TotalGameTime <= 0!");
+
+        if (FinishLinePrefab == null)
+            Debug.LogError("PlatformSpawnerSettingsSO: FinishLinePrefab null!");
     }
 
     public MovingPlatform GetRandomPlatformPrefab()
