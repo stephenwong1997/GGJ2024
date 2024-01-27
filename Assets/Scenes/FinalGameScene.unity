@@ -449,8 +449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _updateSettingsFromJoystick: 0
-  _chickenLives: 2
-  _eggLives: 2
+  _chickenLives: 20
+  _eggLives: 20
   _uiController: {fileID: 1161767050}
   _qrCodeParent: {fileID: 1258144128}
   _platformSpawner: {fileID: 1117664921}
@@ -551,7 +551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &353143366
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2027,7 +2027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1291257217
 RectTransform:
   m_ObjectHideFlags: 0

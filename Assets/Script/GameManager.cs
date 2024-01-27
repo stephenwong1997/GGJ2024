@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
             m_ChickenLives = value;
             OnChickenLivesChanged?.Invoke(value);
 
-            // TODO : Check game win
+            _instance.CheckWin();
         }
     }
     private static int m_ChickenLives;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             m_EggLives = value;
             OnEggLivesChanged?.Invoke(value);
 
-            // TODO : Check game win
+            _instance.CheckWin();
         }
     }
     private static int m_EggLives;
@@ -126,6 +126,28 @@ public class GameManager : MonoBehaviour
         _uiController.StartTweenTimer();
 
         _hasGameStarted = true;
+    }
+
+    private void CheckWin()
+    {
+        if (m_ChickenLives > 0 && m_EggLives > 0)
+            return;
+
+        bool chickenWon = m_ChickenLives == 0;
+        EndGameSequenceAsync(chickenWon).Forget();
+    }
+
+    private async UniTaskVoid EndGameSequenceAsync(bool chickenWon)
+    {
+        Time.timeScale = 0;
+
+        const float DELAY_TIME = 1;
+        await UniTask.Delay(Mathf.CeilToInt(DELAY_TIME * 1000), ignoreTimeScale: true);
+
+        if (chickenWon)
+            StartChickenWonSequence();
+        else
+            StartEggWonSequence();
     }
 
     private async UniTask UpdateSettingsFromJoystickAsync()
