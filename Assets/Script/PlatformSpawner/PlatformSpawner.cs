@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
+using TMPro;
 
 public class PlatformSpawner : MonoBehaviour
 {
+    public static PlatformSpawner instance;
     [Header("Settings")]
     [SerializeField] private PlatformSpawnerSettingsSO _settings;
 
@@ -27,7 +30,10 @@ public class PlatformSpawner : MonoBehaviour
         if (_destroyPoint == null)
             Debug.LogError("PlatformSpawner: _destroyPoint null!");
     }
-
+    void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         StartSpawnLoopAsync().Forget(); // Forget means fire and forget, no need to await
@@ -38,7 +44,7 @@ public class PlatformSpawner : MonoBehaviour
     {
         _isSpawning = false;
     }
-
+    public static PlatformSpawnerSettingsSO Setting => instance._settings;
     // PRIVATE METHODS
     private async UniTaskVoid StartSpawnLoopAsync()
     {
