@@ -133,8 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 15
-  _explosionForce: 5000
-  _explosionRadius: 3
+  _explosionForce: 7500
+  _explosionRadius: 5
   explosionParticle: {fileID: 183222, guid: 4561cb7e4f57a3646951d2bd6e566fc6, type: 3}
 --- !u!50 &3825542711328571799
 Rigidbody2D:
