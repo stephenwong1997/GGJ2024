@@ -42,6 +42,8 @@ public class MovingPlatform : MonoBehaviour
     {
         foreach (Transform spawnPosition in _spawnItemPositions)
         {
+            if (spawnPosition == null) continue;
+
             // Each spawn position has a spawn probablity
             bool canSpawn = Random.value < _settings.ItemSpawnProbability;
             if (!canSpawn) continue;
