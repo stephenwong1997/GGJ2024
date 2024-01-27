@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private List<GameObject> chickenOrEgg; //chicken = 0, egg = 1
 
     [SerializeField] private CharacterDisplayController _displayController;
+    [SerializeField] private PlayerItemController _itemController;
+
     private Rigidbody2D _rb;
     private CircleCollider2D _col;
     private FrameInput _frameInput;
@@ -17,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     public bool Facingleft;
     private bool _cachedQueryStartInColliders;
     private float _time;
-    private SpriteRenderer m_spriteRenderer;
 
 
     [Header("HFT")]
@@ -39,16 +40,28 @@ public class PlayerMovement : MonoBehaviour
     {
         m_playerNumber++;
         chickenOrEgg[m_playerNumber % 2].SetActive(true);
+
         _displayController = GetComponentInChildren<CharacterDisplayController>();
+
+        _itemController = GetComponentInChildren<PlayerItemController>();
+        _itemController.InjectDependencies(new PlayerItemControllerDependencies()
+        {
+            IsFacingLeftGetter = () => Facingleft
+        });
+
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<CircleCollider2D>();
+
         _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
+
         m_hftInput = GetComponent<HFTInput>();
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_gamepad = GetComponent<HFTGamepad>();
+
         SetName(m_gamepad.Name);
+
         m_gamepad.OnNameChange += ChangeName;
         m_gamepad.OnDisconnect += Remove;
+
         baseColor = m_gamepad.color;
         //m_spriteRenderer.color = baseColor;
     }

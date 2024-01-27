@@ -34,20 +34,21 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class HFTGamepad : MonoBehaviour {
+public class HFTGamepad : MonoBehaviour
+{
 
   public const int AXIS_DPAD0_X = 0;
   public const int AXIS_DPAD0_Y = 1;
   public const int AXIS_DPAD1_X = 0;
   public const int AXIS_DPAD1_Y = 1;
   public const int AXIS_ORIENTATION_ALPHA = 4;
-  public const int AXIS_ORIENTATION_BETA  = 5;
+  public const int AXIS_ORIENTATION_BETA = 5;
   public const int AXIS_ORIENTATION_GAMMA = 6;
   public const int AXIS_ACCELERATION_X = 7;
   public const int AXIS_ACCELERATION_Y = 8;
   public const int AXIS_ACCELERATION_Z = 9;
   public const int AXIS_ROTATION_RATE_ALPHA = 10;
-  public const int AXIS_ROTATION_RATE_BETA  = 11;
+  public const int AXIS_ROTATION_RATE_BETA = 11;
   public const int AXIS_ROTATION_RATE_GAMMA = 12;
   public const int AXIS_TOUCH_X = 13;
   public const int AXIS_TOUCH_Y = 14;
@@ -92,12 +93,14 @@ public class HFTGamepad : MonoBehaviour {
   public const int BUTTON_TOUCH8 = 26;
   public const int BUTTON_TOUCH9 = 27;
 
-  public class Button {
+  public class Button
+  {
     public bool pressed = false;
     public float value = 0.0f;
   }
 
-  public enum ControllerType {
+  public enum ControllerType
+  {
     c_1button,
     c_2button,
     c_1dpad_1button,
@@ -112,11 +115,14 @@ public class HFTGamepad : MonoBehaviour {
   }
 
   [System.Serializable]
-  public class ControllerOptions {
-    public ControllerOptions() {
+  public class ControllerOptions
+  {
+    public ControllerOptions()
+    {
     }
 
-    public ControllerOptions(ControllerOptions src) {
+    public ControllerOptions(ControllerOptions src)
+    {
       controllerType = src.controllerType;
       provideOrientation = src.provideOrientation;
       provideAcceleration = src.provideAcceleration;
@@ -127,7 +133,8 @@ public class HFTGamepad : MonoBehaviour {
 
     // Because I don't understand the whole Equals, GetHashCode C# mess
     // I named this SameValues
-    public bool SameValues(ControllerOptions other) {
+    public bool SameValues(ControllerOptions other)
+    {
       return controllerType == other.controllerType &&
              provideOrientation == other.provideOrientation &&
              provideAcceleration == other.provideAcceleration &&
@@ -150,39 +157,49 @@ public class HFTGamepad : MonoBehaviour {
   public Color color = new Color(0.0f, 1.0f, 0.0f);
   public ControllerOptions controllerOptions;
 
-  HFTGamepad() {
+  HFTGamepad()
+  {
     axes = new float[33];
     buttons = new Button[28];
 
-    for (int ii = 0; ii < buttons.Length; ++ii) {
+    for (int ii = 0; ii < buttons.Length; ++ii)
+    {
       buttons[ii] = new Button();
     }
   }
 
   // For backward compatibility
   // use gamepad.color instead
-  public Color Color {
-      get {
-          return color;
-      }
-      set {
-          color = value;
-      }
+  public Color Color
+  {
+    get
+    {
+      return color;
+    }
+    set
+    {
+      color = value;
+    }
   }
 
   // For backward compatibility
   // use gamepad.playerName instead
-  public string Name {
-    get {
+  public string Name
+  {
+    get
+    {
       return playerName;
     }
-    set {
+    set
+    {
       playerName = value;
     }
   }
 
-  public NetPlayer NetPlayer {
-    get {
+  public NetPlayer NetPlayer
+  {
+    get
+    {
       return m_netPlayer;
     }
   }
@@ -203,58 +220,69 @@ public class HFTGamepad : MonoBehaviour {
   private Color m_oldColor;
   private ControllerOptions m_oldControllerOptions = new ControllerOptions();
 
-  private class MessageOptions {
-    public MessageOptions(ControllerOptions _controllerOptions) {
+  private class MessageOptions
+  {
+    public MessageOptions(ControllerOptions _controllerOptions)
+    {
       controllerOptions = _controllerOptions;
     }
 
     public ControllerOptions controllerOptions;
   }
 
-  private class MessageButton {
+  private class MessageButton
+  {
     public int id = 0;
     public bool pressed = false;
   }
 
-  private class MessageColor {
-    public MessageColor(Color _color) {
+  private class MessageColor
+  {
+    public MessageColor(Color _color)
+    {
       color = _color;
     }
     public Color color;
   }
 
-  private class MessageDPad {
+  private class MessageDPad
+  {
     public int pad = 0;
     public int dir = -1;
   }
 
-  private class MessageTouch {
+  private class MessageTouch
+  {
     public int id = 0;
     public int x = 0;
     public int y = 0;
   }
 
-  private class MessageOrient {
+  private class MessageOrient
+  {
     public float a = 0.0f;
     public float b = 0.0f;
     public float g = 0.0f;
     public bool abs = false;
   }
 
-  private class MessageAccel {
+  private class MessageAccel
+  {
     public float x = 0.0f;
     public float y = 0.0f;
     public float z = 0.0f;
   }
 
-  private class MessageRot {
+  private class MessageRot
+  {
     public float a = 0.0f;
     public float b = 0.0f;
     public float g = 0.0f;
   }
 
 
-  void InitializeNetPlayer(SpawnInfo spawnInfo) {
+  void InitializeNetPlayer(SpawnInfo spawnInfo)
+  {
     m_netPlayer = spawnInfo.netPlayer;
     m_netPlayer.OnDisconnect += HandleDisconnect;
 
@@ -284,13 +312,18 @@ public class HFTGamepad : MonoBehaviour {
     }
   }
 
-  void OnDestroy() {
+  void OnDestroy()
+  {
     Cleanup();
   }
 
-  void Cleanup() {
-    m_netPlayer.OnDisconnect -= HandleDisconnect;
-    if (m_playerNameManager != null) {
+  void Cleanup()
+  {
+    if (m_netPlayer != null)
+      m_netPlayer.OnDisconnect -= HandleDisconnect;
+
+    if (m_playerNameManager != null)
+    {
       m_playerNameManager.Close();
       m_playerNameManager = null;
     }
@@ -313,7 +346,8 @@ public class HFTGamepad : MonoBehaviour {
     }
   }
 
-  void SetDefaultColor() {
+  void SetDefaultColor()
+  {
     int colorNdx = s_colorCount++;
 
     // Pick a color
@@ -323,7 +357,7 @@ public class HFTGamepad : MonoBehaviour {
                  ((colorNdx & 0x08) >> 1) |
                  ((colorNdx & 0x10) >> 3) |
                  ((colorNdx & 0x20) >> 5)) / 64.0f;
-    float sat   = (colorNdx & 0x10) != 0 ? 0.5f : 1.0f;
+    float sat = (colorNdx & 0x10) != 0 ? 0.5f : 1.0f;
     float value = (colorNdx & 0x20) != 0 ? 0.5f : 1.0f;
     float alpha = 1.0f;
 
@@ -333,9 +367,10 @@ public class HFTGamepad : MonoBehaviour {
 
   public void ReturnPlayer()
   {
-      if (m_netPlayer != null) {
-        HFTGamepadHelper.helper.playerSpawner.ReturnPlayer(m_netPlayer);
-      }
+    if (m_netPlayer != null)
+    {
+      HFTGamepadHelper.helper.playerSpawner.ReturnPlayer(m_netPlayer);
+    }
   }
 
   void Update()
@@ -362,13 +397,15 @@ public class HFTGamepad : MonoBehaviour {
     }
   }
 
-  void UpdateButton(int ndx, bool pressed) {
+  void UpdateButton(int ndx, bool pressed)
+  {
     Button button = buttons[ndx];
     button.pressed = pressed;
-    button.value   = pressed ? 1.0f : 0.0f;
+    button.value = pressed ? 1.0f : 0.0f;
   }
 
-  void HandleButton(MessageButton data) {
+  void HandleButton(MessageButton data)
+  {
     UpdateButton(data.id, data.pressed);
   }
 
@@ -377,7 +414,8 @@ public class HFTGamepad : MonoBehaviour {
     new int[] { 18, 19, 16, 17, },
   };
 
-  void HandleDPad(MessageDPad data) {
+  void HandleDPad(MessageDPad data)
+  {
     int axisOffset = data.pad * 2;
     int[] buttonIndices = axisButtonMap[data.pad];
     DirInfo dirInfo = Direction.GetDirectionInfo(data.dir);
@@ -386,17 +424,19 @@ public class HFTGamepad : MonoBehaviour {
     UpdateButton(buttonIndices[2], (dirInfo.bits & 0x4) != 0);
     UpdateButton(buttonIndices[3], (dirInfo.bits & 0x8) != 0);
 
-    axes[axisOffset + 0] =  dirInfo.dx;
+    axes[axisOffset + 0] = dirInfo.dx;
     axes[axisOffset + 1] = -dirInfo.dy;
   }
 
-  void HandleOrient(MessageOrient data) {
+  void HandleOrient(MessageOrient data)
+  {
     axes[AXIS_ORIENTATION_ALPHA] = data.a; // data.a / 180 - 1;  // range is suspposed to be 0 to 359
-    axes[AXIS_ORIENTATION_BETA]  = data.b; // data.b / 180;      // range is suspposed to be -180 to 180
+    axes[AXIS_ORIENTATION_BETA] = data.b; // data.b / 180;      // range is suspposed to be -180 to 180
     axes[AXIS_ORIENTATION_GAMMA] = data.g; // data.g / 90;       // range is suspposed to be -90 to 90
   }
 
-  void HandleAccel(MessageAccel data) {
+  void HandleAccel(MessageAccel data)
+  {
     // These values are supposed to be in meters per second squared but I need to convert them to 0 to 1 values.
     // A quick test seems to make them go to +/- around 50 at least on my iPhone5s but different on my android.
     // Maybe I should keep track of max values and reset over time with some threshold?
@@ -406,23 +446,27 @@ public class HFTGamepad : MonoBehaviour {
     axes[AXIS_ACCELERATION_Z] = data.z; //clamp(data.z / maxAcceleration, -1, 1);
   }
 
-  void HandleRot(MessageRot data) {
+  void HandleRot(MessageRot data)
+  {
     axes[AXIS_ROTATION_RATE_ALPHA] = data.a;
-    axes[AXIS_ROTATION_RATE_BETA]  = data.b;
+    axes[AXIS_ROTATION_RATE_BETA] = data.b;
     axes[AXIS_ROTATION_RATE_GAMMA] = data.g;
   }
 
-  void HandleTouch(MessageTouch data) {
+  void HandleTouch(MessageTouch data)
+  {
     int index = data.id * 2;
     axes[AXIS_TOUCH_X + index] = (float)data.x / 500.0f - 1.0f;
     axes[AXIS_TOUCH_Y + index] = (float)data.y / 500.0f - 1.0f;
   }
 
-  void HandleNameChange(string name) {
+  void HandleNameChange(string name)
+  {
     playerName = name;
     System.EventHandler<System.EventArgs> handler = OnNameChange;
-    if (handler != null) {
-        handler(this, new System.EventArgs());
+    if (handler != null)
+    {
+      handler(this, new System.EventArgs());
     }
   }
 }
