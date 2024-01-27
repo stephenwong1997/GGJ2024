@@ -7,6 +7,8 @@ public class ScriptableStats : ScriptableObject
     public LayerMask OneWayPlatformLayer;
     public float MoveSpeed = 14;
 
+    public float SlowedSpeed = 7;
+
     public float Acceleration = 120;
 
     public float Decceleration = 120;

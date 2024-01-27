@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HappyFunTimes;
-
+using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     public bool IsChicken { get; private set; }
@@ -25,18 +25,14 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("HFT")]
     public Transform nameTransform;
-    public Color baseColor;
     private HFTInput m_hftInput;
     public bool deleteWhenDisconnected = true;
     private HFTGamepad m_gamepad;
 
     [Header("Name")]
-    private GUIStyle m_guiStyle = new GUIStyle();
-    private GUIContent m_guiName = new GUIContent("");
-    private Rect m_nameRect = new Rect(0, 0, 0, 0);
     private string m_playerName;
     private static int m_playerNumber = 0;
-
+    public TextMeshProUGUI NameUI;
     private void Awake()
     {
         m_playerNumber++;
@@ -67,9 +63,9 @@ public class PlayerMovement : MonoBehaviour
 
         m_gamepad.OnNameChange += ChangeName;
         m_gamepad.OnDisconnect += Remove;
-        _displayController.preferredColor = m_gamepad.color;
-        _displayController.RandomColor();
-        //m_spriteRenderer.color = baseColor;
+        _displayController.RandomColor(m_playerNumber);
+        m_gamepad.color = _displayController.preferredColor;
+
     }
 
     private void Start()
@@ -80,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+
         _time += Time.deltaTime;
         GatherInput();
         UpdateDisplayController();
@@ -262,10 +259,33 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+
+    public bool isSlowed = false;
+
+    public void GetSlowed()
+    {
+        //Debug.Log("GetSlowed");
+        AudioManager.instance.PlayOnUnusedTrack("StepShit",1f);
+        isSlowed = true;
+    }
+    public void GetOffSlowed()
+    {
+     //  Debug.Log("GetOffSlowed");
+        isSlowed = false;
+    }
+
     private void HandleDirection()
     {
-        float targetSpeed = _frameInput.Move.x * _stats.MoveSpeed;
-        //Debug.Log("_frameInput.Move.x" + _frameInput.Move.x + "_stats.MaxSpeed" + _stats.MoveSpeed);
+        float targetSpeed;
+        if (isSlowed)
+        {
+             targetSpeed = _frameInput.Move.x * _stats.SlowedSpeed;
+        }
+        else {
+             targetSpeed = _frameInput.Move.x * _stats.MoveSpeed;
+        }
+
+
         float speedDif = targetSpeed - _rb.velocity.x;
         float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _stats.Acceleration : _stats.Decceleration;
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, _stats.velPower) * Mathf.Sign(speedDif);
@@ -280,7 +300,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public bool isSlowed = false;
+
 
 
     #region HFT
@@ -296,21 +316,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_playerName = name;
         gameObject.name = "Player-" + m_playerName;
-        m_guiName = new GUIContent(m_playerName);
-        Vector2 size = m_guiStyle.CalcSize(m_guiName);
-        m_nameRect.width = size.x + 12;
-        m_nameRect.height = size.y + 5;
-    }
-
-    void OnGUI()
-    {
-        Vector2 size = m_guiStyle.CalcSize(m_guiName);
-        Vector3 coords = Camera.main.WorldToScreenPoint(nameTransform.position);
-        m_nameRect.x = coords.x - size.x * 0.5f - 5f;
-        m_nameRect.y = Screen.height - coords.y;
-        m_guiStyle.normal.textColor = Color.black;
-        m_guiStyle.contentOffset = new Vector2(4, 2);
-        GUI.Box(m_nameRect, m_playerName, m_guiStyle);
+        NameUI.text = m_playerName;
     }
 
     void ChangeName(object sender, System.EventArgs e)

@@ -9,14 +9,14 @@ public class PoopGround : MonoBehaviour
     {
         if (col.gameObject.tag.Equals("Player"))
         {
-            col.GetComponent<PlayerMovement>().isSlowed = true;
+            col.GetComponent<PlayerMovement>().GetSlowed();
         }
     }
     private void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag.Equals("Player"))
         {
-            col.GetComponent<PlayerMovement>().isSlowed = false;
+            col.GetComponent<PlayerMovement>().GetOffSlowed();
         }
     }
 }
