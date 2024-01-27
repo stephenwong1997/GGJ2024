@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8902224096874147288}
   - component: {fileID: 2435604403741279534}
+  - component: {fileID: 985367844516389235}
   - component: {fileID: 2388489970041230056}
   - component: {fileID: 6572827202011288141}
-  - component: {fileID: 6102469460159747901}
   m_Layer: 0
-  m_Name: Grenade
+  m_Name: FallingPoop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1647860638, guid: a62089df80399f04fae84a684aed434e, type: 3}
+  m_Sprite: {fileID: -1152600004, guid: a62089df80399f04fae84a684aed434e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,6 +87,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &985367844516389235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792947929074265748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375b02c3f78b31c46a77271c39ff21ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poopGround: {fileID: 4512984430291803291, guid: 591cb8478bb9644b1a4ddbe05ba99e5d, type: 3}
 --- !u!50 &2388489970041230056
 Rigidbody2D:
   serializedVersion: 4
@@ -148,18 +161,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.15, y: -0.05}
   serializedVersion: 2
-  m_Radius: 0.83
---- !u!114 &6102469460159747901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8792947929074265748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3803bb21ca35ef743b6d04814fd08301, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackHoleParticle: {fileID: 3476576312195446999, guid: c37f6e91c4f380f44aed2a6946b72ecf, type: 3}
-  forwardForce: 500
+  m_Radius: 1.5
