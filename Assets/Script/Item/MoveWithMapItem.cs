@@ -10,7 +10,8 @@ public class MoveWithMapItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (_settings!=null) {
+        if (_settings == null)
+        {
             _settings = PlatformSpawner.Setting;
         }
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -27,7 +28,7 @@ public class MoveWithMapItem : MonoBehaviour
     {
 
         // Update on every frame for easier adjustment of speed
-        if (_rigidbody != null && _settings!=null)
+        if (_rigidbody != null && _settings != null)
         {
             _rigidbody.velocity = new Vector2(-1, _settings.PlatformSpeed);
             Vector2 targetPosition = transform.position;

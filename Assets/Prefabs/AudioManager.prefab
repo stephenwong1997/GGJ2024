@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSetting:
     masterVolume: 1
-    _BGMVolume: 0.4
+    _BGMVolume: 0.2
     _sfxVolume: 1
     _UIsfxVolume: 1
   audioSources:
