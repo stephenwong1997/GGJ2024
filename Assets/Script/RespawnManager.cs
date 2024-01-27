@@ -58,8 +58,19 @@ public class RespawnManager : MonoBehaviour
             )
             {
                 Debug.Log($"Respawning {targetTransform.gameObject.name} to {_respawnPoint.position}...");
+
                 targetTransform.position = _respawnPoint.position;
                 targetTransform.GetComponent<PlayerMovement>().PlayerRespawn();
+
+                if (targetTransform.TryGetComponent(out PlayerMovement playerMovement))
+                {
+                    bool isChicken = playerMovement.IsChicken;
+
+                    if (isChicken)
+                        GameManager.ChickenLives -= 1;
+                    else
+                        GameManager.EggLives -= 1;
+                }
             }
         }
     }

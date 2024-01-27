@@ -9,8 +9,42 @@ public class GameManager : MonoBehaviour
     public static bool IsGameReady => _instance._isGameReady;
     private static GameManager _instance;
 
+    public static event Action<int> OnChickenLivesChanged;
+    public static int ChickenLives
+    {
+        get => m_ChickenLives;
+        set
+        {
+            if (!_instance._hasGameStarted) return;
+
+            m_ChickenLives = value;
+            OnChickenLivesChanged?.Invoke(value);
+
+            // TODO : Check game win
+        }
+    }
+    private static int m_ChickenLives;
+
+    public static event Action<int> OnEggLivesChanged;
+    public static int EggLives
+    {
+        get => m_EggLives;
+        set
+        {
+            if (!_instance._hasGameStarted) return;
+
+            m_EggLives = value;
+            OnEggLivesChanged?.Invoke(value);
+
+            // TODO : Check game win
+        }
+    }
+    private static int m_EggLives;
+
     [Header("Settings")]
     [SerializeField] private bool _updateSettingsFromJoystick;
+    [SerializeField] private int _chickenLives = 100;
+    [SerializeField] private int _eggLives = 100;
 
     [Header("References")]
     [SerializeField] private UIController _uiController;
@@ -19,6 +53,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> _setActiveOnGameStart;
 
     private bool _isGameReady = false;
+    private bool _hasGameStarted = false;
 
     // MonoBehaviour METHODS
     private void OnValidate()
@@ -31,6 +66,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+
+        m_ChickenLives = _chickenLives;
+        m_EggLives = _eggLives;
     }
 
     private void Start()
@@ -73,6 +111,8 @@ public class GameManager : MonoBehaviour
 
         foreach (var go in _setActiveOnGameStart)
             go.SetActive(true);
+
+        _hasGameStarted = true;
     }
 
     private async UniTask UpdateSettingsFromJoystickAsync()
