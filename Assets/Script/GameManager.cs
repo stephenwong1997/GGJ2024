@@ -81,6 +81,17 @@ public class GameManager : MonoBehaviour
         _uiController.OnReadyClickedEvent -= StartGame;
     }
 
+    // PUBLIC METHODS
+    public static void StartChickenWonSequence()
+    {
+        _instance._uiController.StartTweenChickenWonImage();
+    }
+
+    public static void StartEggWonSequence()
+    {
+        _instance._uiController.StartTweenEggWonImage();
+    }
+
     // PRIVATE METHODS
     private async UniTaskVoid StartGameSequenceAsync()
     {

@@ -29,6 +29,11 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _timerTarget;
     [SerializeField] private GameObject _timerEndRef;
 
+    [Header("Winning Images")]
+    [SerializeField] private float _wonImageTweenDuration = 3f;
+    [SerializeField] private Image _chickenWonImage;
+    [SerializeField] private Image _eggWonImage;
+
     private void OnValidate()
     {
         if (_titleScreenParent == null) Debug.LogError($"UIController: _titleScreenParent null!");
@@ -60,15 +65,36 @@ public class UIController : MonoBehaviour
             _eggLives2.text = GameManager.EggLives.ToString();
         };
 
+        _chickenWonImage.gameObject.SetActive(false);
+        _eggWonImage.gameObject.SetActive(false);
+
         _titleScreenStartButton.onClick.AddListener(OnStartClicked);
         _readyButton.onClick.AddListener(OnReadyClicked);
     }
 
+    // PUBLIC METHODS
     public void StartTweenTimer()
     {
         _timerTarget.transform.DOMove(_timerEndRef.transform.position, PlatformSpawner.Setting.TotalGameTime);
     }
 
+    public void StartTweenChickenWonImage()
+    {
+        _chickenWonImage.color = new Color(0, 0, 0, 0);
+        _chickenWonImage.gameObject.SetActive(true);
+
+        _chickenWonImage.DOColor(Color.white, _wonImageTweenDuration).SetUpdate(UpdateType.Normal, isIndependentUpdate: true);
+    }
+
+    public void StartTweenEggWonImage()
+    {
+        _eggWonImage.color = new Color(0, 0, 0, 0);
+        _eggWonImage.gameObject.SetActive(true);
+
+        _eggWonImage.DOColor(Color.white, _wonImageTweenDuration).SetUpdate(UpdateType.Normal, isIndependentUpdate: true);
+    }
+
+    // PRIVATE METHODS
     private void OnStartClicked()
     {
         if (!GameManager.IsGameReady)

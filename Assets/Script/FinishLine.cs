@@ -46,5 +46,13 @@ public class FinishLine : MonoBehaviour
 
         Camera.main.transform.DOMove(cameraPosition, TWEEN_DURATION).SetUpdate(UpdateType.Normal, isIndependentUpdate: true);
         Camera.main.DOOrthoSize(ORTHO_SIZE, TWEEN_DURATION).SetUpdate(UpdateType.Normal, isIndependentUpdate: true);
+
+        const float AFTER_ZOOM_DELAY_TIME = 2;
+        await UniTask.Delay(Mathf.CeilToInt(AFTER_ZOOM_DELAY_TIME * 1000), ignoreTimeScale: true);
+
+        if (playerMovement.IsChicken)
+            GameManager.StartChickenWonSequence();
+        else
+            GameManager.StartEggWonSequence();
     }
 }
