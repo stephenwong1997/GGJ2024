@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSetting:
     masterVolume: 1
-    _BGMVolume: 1
+    _BGMVolume: 0.4
     _sfxVolume: 1
     _UIsfxVolume: 1
   audioSources:
@@ -1379,10 +1379,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 61e61f29a8ec982439a4257845691094, type: 3}
   - {fileID: 8300000, guid: 0bee7e77c36521f4cb80a254a295a059, type: 3}
   - {fileID: 8300000, guid: ecc5714301efc4f45a6a45a06e39a546, type: 3}
+  - {fileID: 8300000, guid: 4a13eefc4c25d904fb861a1e1e353bff, type: 3}
   - {fileID: 8300000, guid: eaf78a00f1543ff4583ae8de31e1700a, type: 3}
   - {fileID: 8300000, guid: fc612f5291ee38d40aca6265b7cd00af, type: 3}
   - {fileID: 8300000, guid: b47535befb5e2b14d814237079b7ab75, type: 3}
   - {fileID: 8300000, guid: 17b60109492b7a943a292ef02436e366, type: 3}
+  - {fileID: 8300000, guid: 5db3f868cdb40f84db7de9152b0e4b7a, type: 3}
   UI_sfxs: []
 --- !u!1 &5301870429482120144
 GameObject:

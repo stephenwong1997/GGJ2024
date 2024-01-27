@@ -13,7 +13,6 @@ public class CharacterDisplayController : MonoBehaviour
     float animatorSpeed;
     private void OnEnable()
     {
-        //RandomColor();
         animator = GetComponent<Animator>();
         originalScale = transform.localScale;
         animatorSpeed = animator.speed;

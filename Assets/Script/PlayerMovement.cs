@@ -67,8 +67,8 @@ public class PlayerMovement : MonoBehaviour
 
         m_gamepad.OnNameChange += ChangeName;
         m_gamepad.OnDisconnect += Remove;
-
-        baseColor = m_gamepad.color;
+        _displayController.preferredColor = m_gamepad.color;
+        _displayController.RandomColor();
         //m_spriteRenderer.color = baseColor;
     }
 
@@ -85,7 +85,19 @@ public class PlayerMovement : MonoBehaviour
         UpdateDisplayController();
     }
 
-    private void UpdateDisplayController()
+    public void PlayerRespawn()
+    {
+        if (IsChicken)
+        {
+            AudioManager.instance.PlayOnUnusedTrack("chicken_nc148163", 0.7f);
+        }
+        else {
+            AudioManager.instance.PlayOnUnusedTrack("egg_nc261748", 0.7f);
+        }
+
+    }
+
+        private void UpdateDisplayController()
     {
         _displayController.SetBool("IsGrounded", _grounded);
         _displayController.SetBool("IsRunning", _frameVelocity.x != 0);
@@ -253,7 +265,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleDirection()
     {
         float targetSpeed = _frameInput.Move.x * _stats.MoveSpeed;
-        Debug.Log("_frameInput.Move.x" + _frameInput.Move.x + "_stats.MaxSpeed" + _stats.MoveSpeed);
+        //Debug.Log("_frameInput.Move.x" + _frameInput.Move.x + "_stats.MaxSpeed" + _stats.MoveSpeed);
         float speedDif = targetSpeed - _rb.velocity.x;
         float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _stats.Acceleration : _stats.Decceleration;
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, _stats.velPower) * Mathf.Sign(speedDif);

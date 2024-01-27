@@ -17,11 +17,14 @@ public class FallingPoopItem : IEquippedItem
     {
         Vector2 fireDirection = context.IsFacingLeft ? Vector2.left + Vector2.up : Vector2.one;
         SpawnPoop(context.SpawnPosition);
+        Debug.Log("AAA");
     }
     private void SpawnPoop(Vector2 spawnPosition)
     {
+        Debug.Log("BBB");
         FallingPoop poopInstance = GameObject.Instantiate(_fallingPoopPrefab);
         poopInstance.transform.position = spawnPosition;
+        AudioManager.instance.PlayOnUnusedTrack("poop", 0.7f);
     }
 }
 [RequireComponent(typeof(Rigidbody2D))]
@@ -31,6 +34,8 @@ public class FallingPoop : MonoBehaviour, IItemPrefab
     [SerializeField] private GameObject poopGround;
     private void Awake()
     {
+        Debug.Log("CCC");
+        AudioManager.instance.PlayOnUnusedTrack("poop", 0.7f);
         _rigidbody = GetComponent<Rigidbody2D>();
     }
     private void OnCollisionEnter2D(Collision2D collision)

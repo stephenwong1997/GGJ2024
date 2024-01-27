@@ -53,6 +53,7 @@ public class Rocket : MonoBehaviour, IItemPrefab
     // TODO : OnCollision handling
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        AudioManager.instance.PlayOnUnusedTrack("explode_nc273971",0.7f);
         Instantiate(explosionParticle, transform.position, Quaternion.identity);
         Explode();
         Destroy(this.gameObject);
