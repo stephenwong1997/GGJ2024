@@ -9,6 +9,12 @@ public class GrenadeItem : IEquippedItem
     {
         _grenadePrefab = grenadePrefab;
     }
+
+    public EItemType GetItemType()
+    {
+        return EItemType.Grenade;
+    }
+
     public void Use(IItemContext context)
     {
         Vector2 fireDirection = context.IsFacingLeft ? Vector2.left + Vector2.up : Vector2.one;

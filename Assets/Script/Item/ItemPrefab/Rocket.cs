@@ -11,6 +11,11 @@ public class RocketItem : IEquippedItem
         _rocketPrefab = rocketPrefab;
     }
 
+    public EItemType GetItemType()
+    {
+        return EItemType.Rocket;
+    }
+
     public void Use(IItemContext context)
     {
         Vector2 fireDirection = context.IsFacingLeft ? Vector2.left : Vector2.right;

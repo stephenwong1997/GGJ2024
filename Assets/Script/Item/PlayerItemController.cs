@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class PlayerItemControllerDependencies
@@ -15,6 +16,9 @@ public class PlayerItemControllerDependencies
 
 public class PlayerItemController : MonoBehaviour
 {
+    public UnityEvent<EItemType> OnItemEquipped;
+    public UnityEvent OnItemDiscarded;
+
     // SERIALIZED MEMBERS
     [SerializeField]
     [FormerlySerializedAs("_spawnPosition")]
@@ -78,19 +82,19 @@ public class PlayerItemController : MonoBehaviour
         }
 
         _equippedItem.Use(_itemContext);
-        //DiscardEquippedItem();
+        DiscardEquippedItem();
     }
 
     private void SetEquippedItem(IEquippedItem item)
     {
         _equippedItem = item;
-        // TODO : OnEquippedItemChanged => UnityEvent!
+        OnItemEquipped?.Invoke(item.GetItemType());
     }
 
     private void DiscardEquippedItem()
     {
         _equippedItem = null;
-        // TODO : Update display
+        OnItemDiscarded?.Invoke();
     }
 
     // HELPER CLASS

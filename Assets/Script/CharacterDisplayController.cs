@@ -57,10 +57,4 @@ public class CharacterDisplayController : MonoBehaviour
             transform.localScale = originalScale;
         }
     }
-    public enum Weapons
-    {
-        None = 0,
-        Missile = 5,
-
-    }
 }
