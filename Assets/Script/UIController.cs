@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,11 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private GameObject _readyScreenParent;
     [SerializeField] private Button _readyButton;
+
+    [SerializeField] private TextMeshProUGUI _chickenLives1;
+    [SerializeField] private TextMeshProUGUI _chickenLives2;
+    [SerializeField] private TextMeshProUGUI _eggLives1;
+    [SerializeField] private TextMeshProUGUI _eggLives2;
 
     private void OnValidate()
     {
@@ -27,6 +33,23 @@ public class UIController : MonoBehaviour
     {
         _titleScreenParent.SetActive(true);
         _readyScreenParent.SetActive(true);
+
+        _chickenLives1.text = GameManager.ChickenLives.ToString();
+        _chickenLives2.text = GameManager.ChickenLives.ToString();
+        _eggLives1.text = GameManager.EggLives.ToString();
+        _eggLives2.text = GameManager.EggLives.ToString();
+
+        GameManager.OnChickenLivesChanged += (x) =>
+        {
+            _chickenLives1.text = GameManager.ChickenLives.ToString();
+            _chickenLives2.text = GameManager.ChickenLives.ToString();
+        };
+
+        GameManager.OnEggLivesChanged += (x) =>
+        {
+            _eggLives1.text = GameManager.EggLives.ToString();
+            _eggLives2.text = GameManager.EggLives.ToString();
+        };
 
         _titleScreenStartButton.onClick.AddListener(OnStartClicked);
         _readyButton.onClick.AddListener(OnReadyClicked);

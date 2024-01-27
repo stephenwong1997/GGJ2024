@@ -107,6 +107,11 @@ public class PlayerMovement : MonoBehaviour
         CheckCollisions();
         HandleJump();
         HandleDirection();
+
+        Vector2 targetPosition = transform.position;
+        targetPosition.x -= PlatformSpawner.Setting.PlatformSpeed * Time.fixedDeltaTime;
+        // Set the new position
+        transform.position = targetPosition;
     }
 
     #region Input

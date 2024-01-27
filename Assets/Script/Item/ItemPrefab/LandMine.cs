@@ -54,6 +54,7 @@ public class LandMine : MonoBehaviour, IItemPrefab
         if (!collision.collider.tag.Equals("Player"))
             return;
         activated = true;
+        GetComponent<MoveWithMapItem>().enabled = true;
         AudioManager.instance.PlayOnUnusedTrack("mine_nc212991", 0.7f);
         Invoke("CreateFlashLight", 0.23f);
         Destroy(this.gameObject, .9f);

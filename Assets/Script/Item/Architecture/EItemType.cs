@@ -4,4 +4,5 @@ public enum EItemType
     Grenade = 2,
     Poop = 4,
     LandMine = 6,
+    BouncyBed = 8,
 }
