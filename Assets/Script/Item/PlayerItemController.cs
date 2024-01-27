@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class PlayerItemControllerDependencies
 {
@@ -14,25 +16,33 @@ public class PlayerItemControllerDependencies
 
 public class PlayerItemController : MonoBehaviour
 {
-    [SerializeField] private Transform _spawnPosition;
+    public UnityEvent<EItemType> OnItemEquipped;
+    public UnityEvent OnItemDiscarded;
 
+    // SERIALIZED MEMBERS
+    [SerializeField]
+    [FormerlySerializedAs("_spawnPosition")]
+    private Transform _faceRightSpawnPosition;
+
+    [SerializeField]
+    private Transform _faceLeftSpawnPosition;
+
+    // PRIVATE MEMBERS
     private PlayerItemControllerDependencies _dependencies = new();
     private IEquippedItem _equippedItem = null;
     private ItemContext _itemContext = null;
 
     // MonoBehaviour METHODS
-    private void OnValidate()
-    {
-        if (_spawnPosition == null) Debug.LogError($"{this.gameObject.name}: _spawnPosition null!");
-    }
-
     private void Awake()
     {
         _itemContext = new()
         {
-            SpawnPositionGetter = () => _spawnPosition.position,
+            SpawnPositionGetter = () => _dependencies.IsFacingLeft ? _faceLeftSpawnPosition.position : _faceRightSpawnPosition.position,
             IsFacingLeftGetter = () => _dependencies.IsFacingLeft,
         };
+
+        if (_faceRightSpawnPosition == null) Debug.LogError($"{this.gameObject.name}: _faceRightSpawnPosition null!", this.gameObject);
+        if (_faceLeftSpawnPosition == null) Debug.LogError($"{this.gameObject.name}: _faceLeftSpawnPosition null!", this.gameObject);
     }
 
     // PUBLIC METHODS
@@ -72,19 +82,19 @@ public class PlayerItemController : MonoBehaviour
         }
 
         _equippedItem.Use(_itemContext);
-        //DiscardEquippedItem();
+        DiscardEquippedItem();
     }
 
     private void SetEquippedItem(IEquippedItem item)
     {
         _equippedItem = item;
-        // TODO : OnEquippedItemChanged => UnityEvent!
+        OnItemEquipped?.Invoke(item.GetItemType());
     }
 
     private void DiscardEquippedItem()
     {
         _equippedItem = null;
-        // TODO : Update display
+        OnItemDiscarded?.Invoke();
     }
 
     // HELPER CLASS

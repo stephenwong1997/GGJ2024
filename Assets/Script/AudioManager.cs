@@ -86,6 +86,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         ApplyAudioSettings();
+        ChangeBGM(0);
     }
 
     public int GetAudioIDByName(AudioType type, string name)

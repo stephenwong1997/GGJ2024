@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovingPlatform : MonoBehaviour
 {
+    [SerializeField] List<Transform> _spawnItemPositions;
+
     private Rigidbody2D _rigidbody;
     private bool _isMoving = false;
     private PlatformSpawnerSettingsSO _settings;
@@ -33,6 +36,24 @@ public class MovingPlatform : MonoBehaviour
     public void SetDestroyPosition(Vector2 position)
     {
         _destroyXPosition = position.x;
+    }
+
+    public void SpawnRandomItems()
+    {
+        foreach (Transform spawnPosition in _spawnItemPositions)
+        {
+            if (spawnPosition == null) continue;
+
+            // Each spawn position has a spawn probablity
+            bool canSpawn = Random.value < _settings.ItemSpawnProbability;
+            if (!canSpawn) continue;
+
+            FloatingItem itemPrefab = _settings.GetRandomFloatingItemPrefab();
+            FloatingItem itemInstance = Instantiate(itemPrefab);
+
+            itemInstance.transform.parent = this.transform;
+            itemInstance.transform.position = spawnPosition.position;
+        }
     }
 
     // PRIVATE METHODS

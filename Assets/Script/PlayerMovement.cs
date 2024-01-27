@@ -5,11 +5,15 @@ using HappyFunTimes;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool IsChicken { get; private set; }
+
     [Header("Stats")]
     [SerializeField] private ScriptableStats _stats;
     [SerializeField] private List<GameObject> chickenOrEgg; //chicken = 0, egg = 1
 
     [SerializeField] private CharacterDisplayController _displayController;
+    [SerializeField] private PlayerItemController _itemController;
+
     private Rigidbody2D _rb;
     private CircleCollider2D _col;
     private FrameInput _frameInput;
@@ -17,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     public bool Facingleft;
     private bool _cachedQueryStartInColliders;
     private float _time;
-    private SpriteRenderer m_spriteRenderer;
 
 
     [Header("HFT")]
@@ -34,24 +37,47 @@ public class PlayerMovement : MonoBehaviour
     private string m_playerName;
     private static int m_playerNumber = 0;
 
-
     private void Awake()
     {
         m_playerNumber++;
-        chickenOrEgg[m_playerNumber % 2].SetActive(true);
+
+        int index = m_playerNumber % 2;
+        chickenOrEgg[index].SetActive(true);
+        // Index 0 => Chicken
+        // Index 1 => Egg
+        IsChicken = index == 0;
+
         _displayController = GetComponentInChildren<CharacterDisplayController>();
+
+        _itemController = GetComponentInChildren<PlayerItemController>();
+        _itemController.InjectDependencies(new PlayerItemControllerDependencies()
+        {
+            IsFacingLeftGetter = () => Facingleft
+        });
+
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<CircleCollider2D>();
+
         _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
+
         m_hftInput = GetComponent<HFTInput>();
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_gamepad = GetComponent<HFTGamepad>();
+
         SetName(m_gamepad.Name);
+
         m_gamepad.OnNameChange += ChangeName;
         m_gamepad.OnDisconnect += Remove;
-        baseColor = m_gamepad.color;
+        _displayController.preferredColor = m_gamepad.color;
+        _displayController.RandomColor();
         //m_spriteRenderer.color = baseColor;
     }
+
+    private void Start()
+    {
+        // In Start, not Awake, because the components may need to initalize themselves in Awake first
+        RespawnManager.AddToTargetTransforms(this.transform);
+    }
+
     private void Update()
     {
         _time += Time.deltaTime;
@@ -59,12 +85,23 @@ public class PlayerMovement : MonoBehaviour
         UpdateDisplayController();
     }
 
-    private void UpdateDisplayController()
+    public void PlayerRespawn()
+    {
+        if (IsChicken)
+        {
+            AudioManager.instance.PlayOnUnusedTrack("chicken_nc148163", 0.7f);
+        }
+        else {
+            AudioManager.instance.PlayOnUnusedTrack("egg_nc261748", 0.7f);
+        }
+
+    }
+
+        private void UpdateDisplayController()
     {
         _displayController.SetBool("IsGrounded", _grounded);
         _displayController.SetBool("IsRunning", _frameVelocity.x != 0);
-        if (_frameVelocity.x != 0)
-            _displayController.flipX = _frameVelocity.x < 0;
+        _displayController.flipX = Facingleft;
     }
 
     private void FixedUpdate()
@@ -72,8 +109,6 @@ public class PlayerMovement : MonoBehaviour
         CheckCollisions();
         HandleJump();
         HandleDirection();
-        ApplyMovement();
-        HandleGravity();
     }
 
     #region Input
@@ -113,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
         if (_frameInput.SkillDown)
         {
             Debug.Log("SkillDown");
+            _itemController.OnSkillDown();
         }
 
         if (_frameInput.DashDown)
@@ -190,8 +226,7 @@ public class PlayerMovement : MonoBehaviour
         _timeJumpWasPressed = 0;
         _bufferedJumpUsable = false;
         _coyoteUsable = false;
-        _frameVelocity.y = _stats.JumpPower;
-        //_rb.AddForce(new Vector2(0, _stats.JumpPower), ForceMode2D.Impulse);
+        _rb.AddForce(new Vector2(0, _stats.JumpPower), ForceMode2D.Impulse);
     }
 
     #endregion
@@ -206,21 +241,22 @@ public class PlayerMovement : MonoBehaviour
         CanDash = false;
         isDashing = true;
 
-        float targetDashSpeed = _stats.DashSpeed * (Facingleft ? -1 : 1);
-        float originalSpeed = _rb.velocity.x;
-        float dashTime = 0;
+        Vector2 dashForce = new Vector2((Facingleft ? -1 : 1) * _stats.DashSpeed, 0);
+        float orgGS = _rb.gravityScale;
 
-        while (dashTime < _stats.DashDuration)
-        {
-            dashTime += Time.fixedDeltaTime;
-            _frameVelocity.x = Mathf.MoveTowards(originalSpeed, targetDashSpeed, dashTime / _stats.DashDuration * _stats.DashSpeed);
-            _rb.velocity = new Vector2(_frameVelocity.x, 0);
-            yield return new WaitForFixedUpdate();
-        }
 
+        _rb.velocity = new Vector2(0, 0);
+        _rb.gravityScale = 0f;
+        _rb.AddForce(dashForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(_stats.DashDuration);
+        _rb.velocity = new Vector2(0, _rb.velocity.y);
+        _rb.gravityScale = orgGS;
         isDashing = false;
-        _frameVelocity.x = originalSpeed;
+
+        // Wait for dash cooldown
         yield return new WaitForSeconds(_stats.DashCooldown);
+
         CanDash = true;
     }
 
@@ -228,42 +264,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleDirection()
     {
-        if (_frameInput.Move.x == 0)
+        float targetSpeed = _frameInput.Move.x * _stats.MoveSpeed;
+        //Debug.Log("_frameInput.Move.x" + _frameInput.Move.x + "_stats.MaxSpeed" + _stats.MoveSpeed);
+        float speedDif = targetSpeed - _rb.velocity.x;
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _stats.Acceleration : _stats.Decceleration;
+        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, _stats.velPower) * Mathf.Sign(speedDif);
+
+
+        if (targetSpeed != 0)
         {
-            var deceleration = _grounded ? _stats.GroundDeceleration : _stats.AirDeceleration;
-            _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, 0, deceleration * Time.fixedDeltaTime);
-        }
-        else
-        {
-            _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
+            Facingleft = targetSpeed < 0;
         }
 
-        if (_frameVelocity.x != 0)
-        {
-            //m_spriteRenderer.flipX = _frameVelocity.x < 0; //Flip
-            Facingleft = _frameVelocity.x < 0;
-        }
-
+        _rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
 
     }
-    private void HandleGravity()
-    {
-        if (_grounded && _frameVelocity.y <= 0f)
-        {
-            _frameVelocity.y = _stats.GroundingForce;
-        }
-        else
-        {
-            if (isDashing)
-            {
-                return;
-            }
-            var inAirGravity = _stats.FallAcceleration;
-            if (_endedJumpEarly && _frameVelocity.y > 0) inAirGravity *= _stats.JumpEndEarlyGravityModifier;
-            _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
-        }
-    }
-    private void ApplyMovement() => _rb.velocity = _frameVelocity;
+
+    public bool isSlowed = false;
+
 
     #region HFT
     void Remove()

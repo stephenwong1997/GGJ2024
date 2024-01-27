@@ -223,10 +223,10 @@ TextureImporter:
       name: ggjhk items_4
       rect:
         serializedVersion: 2
-        x: 18
-        y: 743
-        width: 184
-        height: 130
+        x: 1340
+        y: 550
+        width: 445
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,10 +244,10 @@ TextureImporter:
       name: ggjhk items_5
       rect:
         serializedVersion: 2
-        x: 421
-        y: 779
-        width: 83
-        height: 68
+        x: 18
+        y: 743
+        width: 184
+        height: 130
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,10 +265,10 @@ TextureImporter:
       name: ggjhk items_6
       rect:
         serializedVersion: 2
-        x: 60
-        y: 595
-        width: 118
-        height: 96
+        x: 421
+        y: 779
+        width: 83
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,10 +286,10 @@ TextureImporter:
       name: ggjhk items_7
       rect:
         serializedVersion: 2
-        x: 311
-        y: 551
-        width: 161
-        height: 160
+        x: 60
+        y: 595
+        width: 118
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,6 +307,48 @@ TextureImporter:
       name: ggjhk items_8
       rect:
         serializedVersion: 2
+        x: 311
+        y: 551
+        width: 161
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18b4df943449645bfbebef7b0c0ecf0b
+      internalID: 593526517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ggjhk items_9
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 612
+        width: 183
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e580e4b8f566c4a41a571db28aae5cd4
+      internalID: -1152600004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ggjhk items_10
+      rect:
+        serializedVersion: 2
         x: 22
         y: 476
         width: 176
@@ -318,8 +360,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18b4df943449645bfbebef7b0c0ecf0b
-      internalID: 593526517
+      spriteID: b2daf03ffcaaf4e31a4b3e5cdbe8c8d1
+      internalID: 650730352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ggjhk items_11
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 494
+        width: 217
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5522c8e7c407b48f4bb71e7e596bc799
+      internalID: -1886384516
       vertices: []
       indices: 
       edges: []
@@ -337,6 +400,8 @@ TextureImporter:
     nameFileIdTable:
       ggjhk items_0: 446584801
       ggjhk items_1: 1647860638
+      ggjhk items_10: 650730352
+      ggjhk items_11: -1886384516
       ggjhk items_2: 2053059486
       ggjhk items_3: 23593193
       ggjhk items_4: 1829449593
@@ -344,6 +409,7 @@ TextureImporter:
       ggjhk items_6: -2147095449
       ggjhk items_7: -884425046
       ggjhk items_8: 593526517
+      ggjhk items_9: -1152600004
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

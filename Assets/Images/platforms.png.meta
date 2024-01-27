@@ -37,15 +37,15 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 280
@@ -108,6 +108,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -210,9 +223,9 @@ TextureImporter:
       name: platforms_4
       rect:
         serializedVersion: 2
-        x: 1642
+        x: 1641
         y: 561
-        width: 1437
+        width: 1439
         height: 176
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -221,8 +234,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b033f2a6a988a8c4cba0f9d45fe1492a
-      internalID: -518050884
+      spriteID: 92712cd665f894cfeba17190bf98fa0c
+      internalID: 243673214
       vertices: []
       indices: 
       edges: []
@@ -242,7 +255,7 @@ TextureImporter:
       platforms_1: -1095455451
       platforms_2: 419053275
       platforms_3: 909215835
-      platforms_4: -518050884
+      platforms_4: 243673214
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

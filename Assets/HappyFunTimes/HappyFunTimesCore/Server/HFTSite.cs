@@ -24,11 +24,13 @@ namespace HappyFunTimes
             public string port = "18679";
         }
 
-        class SharedState {
+        class SharedState
+        {
             public bool success = false;
         }
 
-        class Informer {
+        class Informer
+        {
             const int kMaxTries = 60;
 
             string url_;
@@ -86,7 +88,15 @@ namespace HappyFunTimes
 
             IEnumerator InformCoroutine()
             {
-                www_ = new UnityWebRequest(url_, UnityWebRequest.kHttpVerbPOST);
+                try
+                {
+                    www_ = new UnityWebRequest(url_, UnityWebRequest.kHttpVerbPOST);
+                }
+                catch
+                {
+                    yield break;
+                }
+
                 www_.uploadHandler = new UploadHandlerRaw(addressesBytes_);
                 www_.uploadHandler.contentType = "application/json";
                 www_.downloadHandler = new DownloadHandlerBuffer();
@@ -197,7 +207,7 @@ namespace HappyFunTimes
         // until they're finished (success or failure)
         IEnumerator CheckAddresses()
         {
-            for (;;)
+            for (; ; )
             {
                 // I'm not sure what to do here. The original node.js version
                 // had advantages here. One is it's naturally multi-threaded
@@ -235,7 +245,7 @@ namespace HappyFunTimes
                     }
                 }
 
-                foreach(Informer informer in informers_)
+                foreach (Informer informer in informers_)
                 {
                     informer.Inform(haveNewAddresses, this, addressBytes_, oldAddressesStr_);
                 }

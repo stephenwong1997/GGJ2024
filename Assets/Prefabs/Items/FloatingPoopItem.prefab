@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 226799456078191135}
   - component: {fileID: 7260106025436921402}
   m_Layer: 0
-  m_Name: FloatingGrenateetItem
+  m_Name: FloatingPoopItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2545f82b69754956b8ad6cef01fee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemType: 2
-  _itemPrefab: {fileID: 8792947929074265748, guid: b91cb1c0c1b95854e903f6dd7d601f97, type: 3}
+  _itemType: 4
+  _itemPrefab: {fileID: 8792947929074265748, guid: 01f7ce6383c69024281c222fe112f153, type: 3}
 --- !u!58 &7260106025436921402
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1647860638, guid: a62089df80399f04fae84a684aed434e, type: 3}
+  m_Sprite: {fileID: -1152600004, guid: a62089df80399f04fae84a684aed434e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
