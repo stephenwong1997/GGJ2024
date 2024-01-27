@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using DG.Tweening;
 
 public class FinishLine : MonoBehaviour
 {
@@ -33,13 +34,17 @@ public class FinishLine : MonoBehaviour
     {
         Time.timeScale = 0;
 
-        await UniTask.Delay(3000, ignoreTimeScale: true);
+        const float DELAY_TIME = 1;
+        await UniTask.Delay(Mathf.CeilToInt(DELAY_TIME * 1000), ignoreTimeScale: true);
 
         var cameraPosition = Camera.main.transform.position;
         cameraPosition.x = playerMovement.transform.position.x;
         cameraPosition.y = playerMovement.transform.position.y;
 
-        Camera.main.transform.position = cameraPosition;
-        Camera.main.orthographicSize = 1.2f;
+        const float TWEEN_DURATION = 0.5f;
+        const float ORTHO_SIZE = 1.2f;
+
+        Camera.main.transform.DOMove(cameraPosition, TWEEN_DURATION).SetUpdate(UpdateType.Normal, isIndependentUpdate: true);
+        Camera.main.DOOrthoSize(ORTHO_SIZE, TWEEN_DURATION).SetUpdate(UpdateType.Normal, isIndependentUpdate: true);
     }
 }
