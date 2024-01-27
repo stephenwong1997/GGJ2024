@@ -112,6 +112,8 @@ public class GameManager : MonoBehaviour
         foreach (var go in _setActiveOnGameStart)
             go.SetActive(true);
 
+        _uiController.StartTweenTimer();
+
         _hasGameStarted = true;
     }
 

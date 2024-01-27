@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIController : MonoBehaviour
 {
     public event Action OnReadyClickedEvent;
+
+    [Header("Screens")]
 
     [SerializeField] private GameObject _titleScreenParent;
     [SerializeField] private Button _titleScreenStartButton;
@@ -15,10 +18,16 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _readyScreenParent;
     [SerializeField] private Button _readyButton;
 
+    [Header("Lives")]
+
     [SerializeField] private TextMeshProUGUI _chickenLives1;
     [SerializeField] private TextMeshProUGUI _chickenLives2;
     [SerializeField] private TextMeshProUGUI _eggLives1;
     [SerializeField] private TextMeshProUGUI _eggLives2;
+
+    [Header("Timer")]
+    [SerializeField] private GameObject _timerTarget;
+    [SerializeField] private GameObject _timerEndRef;
 
     private void OnValidate()
     {
@@ -53,6 +62,11 @@ public class UIController : MonoBehaviour
 
         _titleScreenStartButton.onClick.AddListener(OnStartClicked);
         _readyButton.onClick.AddListener(OnReadyClicked);
+    }
+
+    public void StartTweenTimer()
+    {
+        _timerTarget.transform.DOMove(_timerEndRef.transform.position, PlatformSpawner.Setting.TotalGameTime);
     }
 
     private void OnStartClicked()
