@@ -130,6 +130,12 @@ public class AudioManager : MonoBehaviour
         audioSources[0].volume = volume * audioSetting.sfxVolume;
         audioSources[0].clip = (sfxs.Find((s) => s.name == audioName));
         audioSources[0].Play();
+    }   
+    public void Play(AudioClip audioClip)
+    {
+        audioSources[0].volume = audioSetting.sfxVolume;
+        audioSources[0].clip = audioClip;
+        audioSources[0].Play();
     }
 
 
