@@ -132,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
         if (_frameInput.SkillDown)
         {
             Debug.Log("SkillDown");
+            _itemController.OnSkillDown();
         }
 
         if (_frameInput.DashDown)
