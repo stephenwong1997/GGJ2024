@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 226799456078191135}
   - component: {fileID: 7260106025436921402}
   m_Layer: 0
-  m_Name: FloatingRocketItem
+  m_Name: FloatingLandMineItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2545f82b69754956b8ad6cef01fee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemType: 0
-  _itemPrefab: {fileID: 3302703749534235971, guid: 3c94362bb05094ac68ab697d8612690f, type: 3}
+  _itemType: 6
+  _itemPrefab: {fileID: 991636234511012050, guid: fc3ce52dc37a98b4f8f45f05ef28f894, type: 3}
 --- !u!58 &7260106025436921402
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -193,13 +193,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5249218730852014521}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.35714552, w: 0.9340488}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.008, y: -0.113, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5723981438196426466}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -41.85}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8618168058429104747
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 23593193, guid: a62089df80399f04fae84a684aed434e, type: 3}
+  m_Sprite: {fileID: 2053059486, guid: a62089df80399f04fae84a684aed434e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0d763beb1174d3893e85e72fbae472, type: 3}
   m_Name: PlatformSpawnerSettingsSO
   m_EditorClassIdentifier: 
-  MinSpawnFrequency: 1.4
+  MinSpawnFrequency: 1.5
   MaxSpawnFrequency: 2.5
   PlatformPrefabs:
   - {fileID: 6017441187374012398, guid: e268cc0a928ce4be1a2956d89dcc2a2b, type: 3}
@@ -27,7 +27,7 @@ MonoBehaviour:
   TotalGameTime: 30
   SpawnFinishLineDelay: 2
   FinishLinePrefab: {fileID: 6241072551693658935, guid: 1fc2278234df74916828de51bdb1bcf6, type: 3}
-  PlatformSpeed: 5
+  PlatformSpeed: 4
   ItemSpawnProbability: 1
   FloatingItemPrefabs:
   - {fileID: 226799456078191135, guid: 0bff972c8d62e48ecb11e934cf59da21, type: 3}

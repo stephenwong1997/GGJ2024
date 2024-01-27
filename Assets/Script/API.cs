@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 
 public static class API
 {
-    public static async UniTask GetJoystickSettingsAsync()
+    public static async UniTask<PlatformSettings> GetJoystickSettingsAsync()
     {
         string url = "https://api.getjoystick.com/api/v1/config/ggj2024_production/dynamic";
         string requestJSON = "{}";
@@ -16,10 +17,11 @@ public static class API
         if (response.Status != ReturnStatus.OK)
         {
             Debug.LogError($"GetJoystickSettingsAsync Response Status: {response.Status}, JSON: {response.JSON}.");
-            return;
+            return null;
         }
 
-        // TODO
+        ConfigItem configItem = JsonConvert.DeserializeObject<ConfigItem>(response.JSON);
+        return configItem.data.platformSettings;
     }
 
     private static async UniTask<WebServiceResponse> CallWebServiceAsync(string url, string requestJSON)
@@ -79,6 +81,107 @@ public static class API
             JSON = json;
         }
     }
+
+
+    [System.Serializable]
+    public class ConfigItem
+    {
+        [JsonProperty("data")]
+        public ConfigData data;
+        public Dictionary<string, object> meta;
+    }
+
+    [System.Serializable]
+    public class ConfigData
+    {
+        [JsonProperty("platform-settings")]
+        public PlatformSettings platformSettings;
+    }
+
+    /*
+    "data": {
+        "platform-settings": {
+            "min-spawn-frequency": 1.4,
+            "max-spawn-frequency": 2.5,
+            "total-game-time": 20,
+            "spawn-finish-line-delay": 2,
+            "platform-speed": 5,
+            "item-spawn-probability": 1
+        }
+    },
+    */
+
+    [System.Serializable]
+    public class PlatformSettings
+    {
+        [JsonProperty("min-spawn-frequency")]
+        public float minSpawnFrequency;
+
+        [JsonProperty("max-spawn-frequency")]
+        public float maxSpawnFreqeuncy;
+
+        [JsonProperty("total-game-time")]
+        public float totalGameTime;
+
+        [JsonProperty("spawn-finish-line-delay")]
+        public float spawnFinishLineDelay;
+
+        [JsonProperty("platform-speed")]
+        public float platformSpeed;
+
+        [JsonProperty("item-spawn-probability")]
+        public float itemSpawnProbability;
+    }
+}
+
+[System.Serializable]
+public class ConfigItem
+{
+    [JsonProperty("data")]
+    public ConfigData data;
+    public Dictionary<string, object> meta;
+}
+
+[System.Serializable]
+public class ConfigData
+{
+    [JsonProperty("platform-settings")]
+    public PlatformSettings platformSettings;
+}
+
+/*
+"data": {
+    "platform-settings": {
+        "min-spawn-frequency": 1.4,
+        "max-spawn-frequency": 2.5,
+        "total-game-time": 20,
+        "spawn-finish-line-delay": 2,
+        "platform-speed": 5,
+        "item-spawn-probability": 1
+    }
+},
+*/
+
+[System.Serializable]
+public class PlatformSettings
+{
+    [JsonProperty("min-spawn-frequency")]
+    public float minSpawnFrequency;
+
+    [JsonProperty("max-spawn-frequency")]
+    public float maxSpawnFreqeuncy;
+
+    [JsonProperty("total-game-time")]
+    public float totalGameTime;
+
+    [JsonProperty("spawn-finish-line-delay")]
+    public float spawnFinishLineDelay;
+
+    [JsonProperty("platform-speed")]
+    public float platformSpeed;
+
+    [JsonProperty("item-spawn-probability")]
+    public float itemSpawnProbability;
 }
 
 public enum ReturnStatus

@@ -11,6 +11,13 @@ public class CharacterDisplayController : MonoBehaviour
     public Vector3 originalScale;
     public Color preferredColor;
     float animatorSpeed;
+    private string[] chickenColor = new string[] { "FF9989", "FF1113", "FFC611", "85D22E", "329F9E", "38AEFF", "38AEFF", "7338FF", "CC58FF", "FFFFFF" };
+    private string[] eggColor = new string[] { "FF5F60", "FFF886", "B4FD61", "66E2E1", "6BC3FF", "6B8BFF", "976BFF", "E6ABFF", "FFBFB5", "FFFFFF" };
+    public void Start()
+    {
+
+    }
+
     private void OnEnable()
     {
         animator = GetComponent<Animator>();
@@ -23,12 +30,26 @@ public class CharacterDisplayController : MonoBehaviour
     {
         animator.speed = animatorSpeed;
     }
-    public void RandomColor()
+    public void RandomColor(int PlayerID)
     {
-        for (int i = 0; i < coloredParts.Count; i++)
+        string hexColor;
+        if (PlayerID % 2 == 0)
         {
-            coloredParts[i].color = preferredColor;
+            hexColor=chickenColor[PlayerID / 2];
         }
+        else {
+            hexColor = eggColor[PlayerID / 2];
+        }
+
+
+        if (ColorUtility.TryParseHtmlString("#" + hexColor, out preferredColor))
+        {
+            for (int i = 0; i < coloredParts.Count; i++)
+            {
+                coloredParts[i].color = preferredColor;
+            }
+        }
+
     }
 
     public void SetTrigger(string name)
