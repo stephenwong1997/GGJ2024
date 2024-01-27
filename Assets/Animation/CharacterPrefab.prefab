@@ -94,6 +94,10 @@ PrefabInstance:
       propertyPath: _displayController.Array.data[1]
       value: 
       objectReference: {fileID: 7502232209306456633}
+    - target: {fileID: 3137603470859027425, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.81
+      objectReference: {fileID: 0}
     - target: {fileID: 4181464654872824803, guid: 739287357f5f8d44eb43c394e219cfdc, type: 3}
       propertyPath: m_IsActive
       value: 0

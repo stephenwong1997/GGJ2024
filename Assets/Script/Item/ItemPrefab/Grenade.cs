@@ -48,7 +48,6 @@ public class Grenade : MonoBehaviour, IItemPrefab
         if (isActivated)
             return;
         print("Create Bomb bomb");
-
         Instantiate(blackHoleParticle, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
         isActivated = true;

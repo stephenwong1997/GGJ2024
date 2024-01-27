@@ -59,6 +59,7 @@ public class RespawnManager : MonoBehaviour
             {
                 Debug.Log($"Respawning {targetTransform.gameObject.name} to {_respawnPoint.position}...");
                 targetTransform.position = _respawnPoint.position;
+                targetTransform.GetComponent<PlayerMovement>().PlayerRespawn();
             }
         }
     }
