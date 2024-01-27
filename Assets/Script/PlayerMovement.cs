@@ -5,6 +5,8 @@ using HappyFunTimes;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool IsChicken { get; private set; }
+
     [Header("Stats")]
     [SerializeField] private ScriptableStats _stats;
     [SerializeField] private List<GameObject> chickenOrEgg; //chicken = 0, egg = 1
@@ -38,7 +40,12 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         m_playerNumber++;
-        chickenOrEgg[m_playerNumber % 2].SetActive(true);
+
+        int index = m_playerNumber % 2;
+        chickenOrEgg[index].SetActive(true);
+        // Index 0 => Chicken
+        // Index 1 => Egg
+        IsChicken = index == 0;
 
         _displayController = GetComponentInChildren<CharacterDisplayController>();
 
