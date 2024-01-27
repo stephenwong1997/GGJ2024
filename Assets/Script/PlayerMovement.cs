@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
     private string m_playerName;
     private static int m_playerNumber = 0;
 
-
     private void Awake()
     {
         m_playerNumber++;
@@ -65,6 +64,13 @@ public class PlayerMovement : MonoBehaviour
         baseColor = m_gamepad.color;
         //m_spriteRenderer.color = baseColor;
     }
+
+    private void Start()
+    {
+        // In Start, not Awake, because the components may need to initalize themselves in Awake first
+        RespawnManager.AddToTargetTransforms(this.transform);
+    }
+
     private void Update()
     {
         _time += Time.deltaTime;
