@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
         if (m_ChickenLives > 0 && m_EggLives > 0)
             return;
 
-        bool chickenWon = m_ChickenLives == 0;
+        bool chickenWon = m_EggLives == 0;
         EndGameSequenceAsync(chickenWon).Forget();
     }
 
